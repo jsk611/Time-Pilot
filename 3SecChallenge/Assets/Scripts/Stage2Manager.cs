@@ -16,6 +16,7 @@ public class Stage2Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         randNum = Random.Range(0, 2);
         switch(randNum)
         {

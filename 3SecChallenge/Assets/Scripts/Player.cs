@@ -23,11 +23,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameManager.isFinished)
-            return;
+        //if (gameManager.isFinished)
+        //    return;
         float h = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
         float v = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
         transform.Translate(h,v,0);
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             gameManager.isFailed = true;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
         {
             gameManager.isFailed = true;
             Destroy(collision.gameObject);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 }

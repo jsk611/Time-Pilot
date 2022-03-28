@@ -44,9 +44,12 @@ public class GameManager : MonoBehaviour
                 NextStage();
                 t = 0;
             }
-            
         }
-
+        if (timeBar == null)
+        {
+            _isFinished = false;
+            timeBar = GameObject.Find("Canvas").transform.Find("Time Bar").GetComponent<Image>();
+        }
     }
 
     void NextStage()

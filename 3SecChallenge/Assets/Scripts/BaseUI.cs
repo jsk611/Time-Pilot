@@ -12,8 +12,9 @@ public class BaseUI : MonoBehaviour
     public int hp=3;
     public int score=0;
     public GameManager gameManager;
-    public AudioSource audio;
-    public AudioSource damagedS;
+    public AudioSource BGM;
+    public GameObject player;
+    //public AudioSource damagedS;
    
     int highScore;
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class BaseUI : MonoBehaviour
         highScore = PlayerPrefs.GetInt("highScore");
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(canvas);
+        DontDestroyOnLoad(player);
         Time.timeScale = 1f;
      
     }
@@ -29,14 +31,8 @@ public class BaseUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Lobby")
-        {
-            scoreText.text = "HighScore : " + highScore.ToString();
-            Time.timeScale = 1f;
-            hpText.gameObject.SetActive(false);
-            audio.Stop();
-        }
-        else if (SceneManager.GetActiveScene().name != "GameOver")
+        
+        if (SceneManager.GetActiveScene().name != "GameOver")
         {
             scoreText.text = "Score : " + score.ToString();
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -51,9 +47,8 @@ public class BaseUI : MonoBehaviour
         }
 
 
-        if(gameManager.isFailed)
+        if (gameManager.isFailed)
         {
-            damagedS.Play();
             hp--;
             gameManager.isFailed = false;
         }
@@ -78,17 +73,8 @@ public class BaseUI : MonoBehaviour
             Time.timeScale = 2f;
 
         gameManager.score = score;
-        FirstS();
+        
     }
 
-    void FirstS()
-    {
-        if(SceneManager.GetActiveScene().name == "First Stage")
-        {
-            hp = 3;
-            hpText.gameObject.SetActive(true);
-            score = 0;
-            audio.Play();
-        }
-    }
+    
 }

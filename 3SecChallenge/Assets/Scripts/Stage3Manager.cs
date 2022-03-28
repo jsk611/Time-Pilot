@@ -10,7 +10,8 @@ public class Stage3Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i=0; i<5; i++)
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        for (int i=0; i<5; i++)
         {
             if (Random.Range(0, 3) != 0)
                 Instantiate(Laser, spawnPoints[i].position, spawnPoints[i].rotation);
