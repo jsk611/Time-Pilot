@@ -12,12 +12,17 @@ public class GameManager : MonoBehaviour
     
     public Text scoreText;
     [SerializeField] GameObject[] hpImgs;
+
+    public float time;
+    [SerializeField] Image timeBar;
+
+    public bool success;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(baseUI);
-
+        time = 3;
         hp = 4;
     }
 
@@ -29,6 +34,38 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
             DecreaseHp();
+
+        if (time > 0)
+            time -= Time.deltaTime;
+        else if(time < 0)
+        {
+            StartCoroutine(TimeOut());
+            time = 0;
+        }
+
+        timeBar.fillAmount = time / 3f;
+    }
+
+    IEnumerator TimeOut()
+    {
+        if(success)
+        {
+            Debug.Log("O");
+        }
+        else
+        {
+            Debug.Log("X");
+            DecreaseHp();
+        }
+        yield return new WaitForSeconds(1.5f);
+        //destroy
+        for(int i=3; i>0; i--)
+        {
+            //countdown
+            Debug.Log(i.ToString());
+            yield return new WaitForSeconds(1f);
+        }
+        NextStage();
     }
 
     public void DecreaseHp()
@@ -51,7 +88,12 @@ public class GameManager : MonoBehaviour
         //랜덤 스테이지 이동
 
         if (Input.GetKeyDown(KeyCode.N))
+        {
             SceneManager.LoadScene("Stage 1");
+            time = 3;
+
+        }
+
     }
 
     public void GameOver()
