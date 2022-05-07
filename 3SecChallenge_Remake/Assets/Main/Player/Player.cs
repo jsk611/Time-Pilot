@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Fade
 {
+    [SerializeField] GameManager gameManager;
     public float speed;
     [SerializeField] GameObject bullet;
     bool reloading;
     float angle;
     Vector2 mouse;
+    [SerializeField] SpriteRenderer spr;
     void Start()
     {
         
@@ -44,5 +46,27 @@ public class Player : MonoBehaviour
         }
         else
             Debug.Log("¿Â¿¸¡ﬂ");
+    }
+
+    IEnumerator Damaged()
+    {
+        gameObject.tag = "DamagedPlayer";
+        gameManager.Failed(true);
+        for(int i=0; i<3; i++)
+        {
+            StartCoroutine(FadeIn(spr, 0.5f));
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(FadeOut(spr, 0.5f));
+            yield return new WaitForSeconds(0.5f);
+        }
+        gameObject.tag = "Player";
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("enemy") && gameObject.tag == "Player")
+        {
+            StartCoroutine(Damaged());
+        }
     }
 }

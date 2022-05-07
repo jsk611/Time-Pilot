@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LogicStages/Stage 1/Stage 1.unity
     guid: 10531873a2f228e45b116b8483403b82
+  - enabled: 1
+    path: Assets/Avoiding/Stage 2/Stage 2.unity
+    guid: 7296cb43ba6b21946bac712da4adbfdb
   m_configObjects: {}

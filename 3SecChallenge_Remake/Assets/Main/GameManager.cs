@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Fade 
 {
     public GameObject player;
     public GameObject baseUI;
@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
 
     public float time;
     [SerializeField] Image timeBar;
+    public Image fade;
 
-    public bool success;
+    bool success;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -24,13 +25,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(baseUI);
         time = 3;
         hp = 4;
+        NextStage();
     }
 
     private void Update()
     {
         score += (int)(Time.deltaTime*200);
         scoreText.text = score.ToString() + "점";
-        NextStage();
 
         if (Input.GetKeyDown(KeyCode.K))
             DecreaseHp();
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator TimeOut()
     {
+        yield return new WaitForEndOfFrame();
         if(success)
         {
             Debug.Log("O");
@@ -55,7 +57,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("X");
-            DecreaseHp();
         }
         yield return new WaitForSeconds(1.5f);
         //destroy
@@ -63,12 +64,26 @@ public class GameManager : MonoBehaviour
         {
             //countdown
             Debug.Log(i.ToString());
-            yield return new WaitForSeconds(1f);
+
+            if (i == 1)
+                StartCoroutine(FadeOut(fade, 0.5f));
+            yield return new WaitForSeconds(0.5f);
         }
         NextStage();
     }
+    public void Succeed()
+    {
+        success = true;
+    }
+    public void Failed(bool timeover)
+    {
+        success = false;
+        if (timeover)
+            time = 0.001f;
 
-    public void DecreaseHp()
+        DecreaseHp();
+    }
+    void DecreaseHp()
     {
         //미션 실패 시 플레이어 체력 감소
         hp--;
@@ -86,13 +101,11 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         //랜덤 스테이지 이동
+        int r = Random.Range(1, 3);
+        SceneManager.LoadScene("Stage "+r.ToString());
+        time = 3;
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SceneManager.LoadScene("Stage 1");
-            time = 3;
-
-        }
+        StartCoroutine(FadeIn(fade, 0.3f));
 
     }
 

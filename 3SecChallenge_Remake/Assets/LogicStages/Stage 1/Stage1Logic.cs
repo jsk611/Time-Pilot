@@ -12,7 +12,7 @@ public class Stage1Logic : MonoBehaviour
     int randNum;
     int answerNum;
     public Text question;
-    bool aaa = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +62,7 @@ public class Stage1Logic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.time <= 0)
+        if (gameManager.time < 0)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -73,13 +73,13 @@ public class Stage1Logic : MonoBehaviour
             if (QAreas[answerNum].GetComponent<QArea>().isTriggered)
             {
                 Debug.Log("정답");
-                gameManager.success = true;
+                gameManager.Succeed();
             }
-            else if (aaa)
+            else
             {
                 Debug.Log("오답");
-                gameManager.success = false;
-                aaa = false;
+                gameManager.Failed(false);
+
             }
 
         }
