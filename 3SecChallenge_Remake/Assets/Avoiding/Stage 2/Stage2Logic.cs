@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage2Logic : MonoBehaviour
+public class Stage2Logic : Stage
 {
-    GameObject player;
-    GameManager gameManager;
     [SerializeField] GameObject cannon;
     [SerializeField] Transform[] spawnPoints;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        LoadInfo();
         for (int i = 0; i < 6; i++)
         {
             int randNum = Random.Range(0, 2);
@@ -27,7 +24,7 @@ public class Stage2Logic : MonoBehaviour
 
     private void Update()
     {
-        if (gameManager.time < 0 && player.CompareTag("Player"))
+        if (gameManager.time < 0 && player.layer == 3)
             gameManager.Succeed();
 
     }

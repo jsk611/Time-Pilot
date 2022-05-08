@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stage1Logic : MonoBehaviour
+public class Stage1Logic : Stage
 {
-    GameManager gameManager;
     [SerializeField] GameObject[] QAreas;
 
     int[] numArr = new int[7];
@@ -16,7 +15,7 @@ public class Stage1Logic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        LoadInfo();
 
         //문제 로직 구현
         numArr[0] = Random.Range(10, 51);
@@ -72,12 +71,10 @@ public class Stage1Logic : MonoBehaviour
             }
             if (QAreas[answerNum].GetComponent<QArea>().isTriggered)
             {
-                Debug.Log("정답");
                 gameManager.Succeed();
             }
             else
             {
-                Debug.Log("오답");
                 gameManager.Failed(false);
 
             }

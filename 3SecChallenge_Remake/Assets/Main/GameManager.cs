@@ -50,6 +50,7 @@ public class GameManager : Fade
     IEnumerator TimeOut()
     {
         yield return new WaitForEndOfFrame();
+        player.layer = 6;
         if(success)
         {
             Debug.Log("O");
@@ -70,6 +71,7 @@ public class GameManager : Fade
             yield return new WaitForSeconds(0.5f);
         }
         NextStage();
+        player.layer = 3;
     }
     public void Succeed()
     {
@@ -101,7 +103,12 @@ public class GameManager : Fade
     public void NextStage()
     {
         //랜덤 스테이지 이동
-        int r = Random.Range(1, 3);
+        int r;
+        do
+        {
+            r = Random.Range(1, 4);
+        } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
+        
         SceneManager.LoadScene("Stage "+r.ToString());
         time = 3;
 

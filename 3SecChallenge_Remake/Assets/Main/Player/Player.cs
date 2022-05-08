@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Fade
 {
@@ -50,21 +51,24 @@ public class Player : Fade
 
     IEnumerator Damaged()
     {
-        gameObject.tag = "DamagedPlayer";
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        string currentScene = SceneManager.GetActiveScene().name;
+        gameObject.layer = 6;
         gameManager.Failed(true);
-        for(int i=0; i<3; i++)
+        while(currentScene == SceneManager.GetActiveScene().name)
         {
             StartCoroutine(FadeIn(spr, 0.5f));
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(FadeOut(spr, 0.5f));
             yield return new WaitForSeconds(0.5f);
         }
-        gameObject.tag = "Player";
+        gameObject.layer = 3;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("enemy") && gameObject.tag == "Player")
+        if(collision.CompareTag("enemy"))
         {
             StartCoroutine(Damaged());
         }

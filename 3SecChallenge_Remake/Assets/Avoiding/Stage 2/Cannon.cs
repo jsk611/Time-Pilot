@@ -39,7 +39,7 @@ public class Cannon : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
-        if (!isDelay && gameManager.time > 0)
+        if (!isDelay)
         {
             isDelay = true;
             Instantiate(bullet, transform.position, transform.rotation);

@@ -8,15 +8,16 @@ TagManager:
   - enemy
   - Answer
   - DamagedPlayer
+  - target
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Damaged
+  - Enemy
   - 
   - 
   - 

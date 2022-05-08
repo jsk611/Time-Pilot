@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Avoiding/Stage 2/Stage 2.unity
     guid: 7296cb43ba6b21946bac712da4adbfdb
+  - enabled: 1
+    path: Assets/Shooting/Stage 3/Stage 3.unity
+    guid: 9bd9be22005a848428988ce48bb7e543
   m_configObjects: {}

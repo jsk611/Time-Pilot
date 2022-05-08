@@ -10,7 +10,7 @@ public class bullet : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * 10);
+        transform.Translate(Vector2.up * Time.deltaTime * 13);
 
     }
 
@@ -18,5 +18,6 @@ public class bullet : MonoBehaviour
     {
         if (!collision.CompareTag("Player"))
             Destroy(gameObject);
+
     }
 }
