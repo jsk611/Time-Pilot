@@ -10,10 +10,10 @@ public class Stage2Logic : Stage
     void Start()
     {
         LoadInfo();
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 8; i++)
         {
-            int randNum = Random.Range(0, 2);
-            if (randNum == 0)
+            int randNum = Random.Range(0, 4);
+            if (randNum != 0)
             {
                 GameObject g = Instantiate(cannon, spawnPoints[i].position, Quaternion.identity);
                 g.GetComponent<Cannon>().player = player.transform;

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : Fade
+public class Player : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     public float speed;
     [SerializeField] GameObject bullet;
     bool reloading;
     float angle;
+    float x, y;
     Vector2 mouse;
     [SerializeField] SpriteRenderer spr;
+    
     void Start()
     {
         
@@ -21,8 +23,8 @@ public class Player : Fade
     void Update()
     {
         //이동
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        x = Input.GetAxisRaw("Horizontal");
+        y = Input.GetAxisRaw("Vertical");
         transform.Translate(new Vector2(x, y) * Time.deltaTime * speed, Space.World);
 
         //회전
@@ -34,7 +36,16 @@ public class Player : Fade
         if (Input.GetMouseButton(0))
             StartCoroutine(Shoot());
     }
+    private void FixedUpdate()
+    {
+        RaycastHit2D hit_x, hit_y;
+        hit_x = Physics2D.Raycast(transform.position, new Vector2(x, 0),1,8);
+        hit_y = Physics2D.Raycast(transform.position, new Vector2(0, y),1,8);
+        if (hit_x.collider != null) x = 0;
+        if (hit_y.collider != null) y = 0;
 
+
+    }
     IEnumerator Shoot()
     {
         if (!reloading)
@@ -48,7 +59,30 @@ public class Player : Fade
         else
             Debug.Log("장전중");
     }
+    public IEnumerator FadeIn(SpriteRenderer spr, float time)
+    {
+        Debug.Log("aa");
+        float a = 1;
+        do
+        {
+            a -= Time.deltaTime / time;
+            spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, a);
+            yield return new WaitForEndOfFrame();
+        } while (spr.color.a > 0);
 
+
+    }
+
+    public IEnumerator FadeOut(SpriteRenderer spr, float time)
+    {
+        float a = 0;
+        do
+        {
+            a += Time.deltaTime / time;
+            spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, a);
+            yield return new WaitForEndOfFrame();
+        } while (spr.color.a < 1);
+    }
     IEnumerator Damaged()
     {
         yield return new WaitForEndOfFrame();

@@ -17,7 +17,7 @@ public class Cannon : MonoBehaviour
     {
 
         isDelay = true;
-        dTime = Random.Range(0.7f, 1.2f);
+        dTime = 0.75f;
         StartCoroutine(ShootCoroutine());
     }
 

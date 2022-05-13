@@ -10,7 +10,7 @@ public class CannonBullet : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * 9);
+        transform.Translate(Vector2.right * Time.deltaTime * 7);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

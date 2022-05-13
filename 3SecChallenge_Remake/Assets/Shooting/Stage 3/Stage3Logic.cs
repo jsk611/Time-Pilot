@@ -13,12 +13,16 @@ public class Stage3Logic : Stage
         if(r==1)
         {
             for (int i = 0; i < 3; i++)
-                Instantiate(target, new Vector2(Random.Range(-8f, 8f), Random.Range(-4f, 4f)), Quaternion.identity);
+                Instantiate(target, new Vector2(Random.Range(-8, 8), Random.Range(-4, 4)), Quaternion.identity);
         }
         else
         {
-            for (int i = 0; i < 3; i++)
-                Instantiate(movingTarget, new Vector2(Random.Range(-8f, -4f), Random.Range(-4f, 4f)), Quaternion.identity);
+            for (int i = 0; i < 2; i++)
+            {
+                float x = Random.Range(-8f, 8f);
+                Instantiate(movingTarget, new Vector2(x, Random.Range(-4, 4)), Quaternion.identity);
+
+            }
         }
         
     }
