@@ -24,8 +24,8 @@ public class Stage2Logic : Stage
 
     private void Update()
     {
-        if (gameManager.time < 0 && player.layer == 3)
-            gameManager.Succeed();
+        //if (gameManager.time < 0 && player.layer == 3)
+        //    gameManager.Succeed();
 
     }
 }

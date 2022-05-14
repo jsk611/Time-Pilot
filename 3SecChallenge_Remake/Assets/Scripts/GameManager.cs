@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         timeBar.fillAmount = time / 3f;
 
-        Time.timeScale = score > 15000 ? 1.5f : 1f + 0.5f / (15000f / score); //시간 가속
+        Time.timeScale = score > 25000 ? 2f : 1f + 1f / (25000f / score); //시간 가속
     }
     private void FixedUpdate()
     {
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         {
             X.SetActive(true);
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.75f);
         O.SetActive(false);
         X.SetActive(false);
 
@@ -77,8 +77,8 @@ public class GameManager : MonoBehaviour
             count.text = i.ToString();
             
             if (i == 1)
-                StartCoroutine(FadeOut(fade, 0.5f));
-            yield return new WaitForSeconds(0.5f);
+                StartCoroutine(FadeOut(fade, 0.75f));
+            yield return new WaitForSeconds(0.75f);
         }
         countdown.SetActive(false);
         NextStage();
@@ -117,14 +117,14 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 4);
+            r = Random.Range(1, 5);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
         
         SceneManager.LoadScene("Stage "+r.ToString());
         time = 3;
 
         StartCoroutine(FadeIn(fade, 0.3f));
-
+        Succeed();
     }
 
     public void GameOver()

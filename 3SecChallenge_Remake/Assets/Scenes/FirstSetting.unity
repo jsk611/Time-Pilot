@@ -1538,12 +1538,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 6d295ccfd114d744e8ba0ac45e274f81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1696b5ec08d38034c9e9b4a125fe8688, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1579,6 +1579,9 @@ MonoBehaviour:
   speed: 5
   bullet: {fileID: 2854862177523427727, guid: 96ed4ae69324d634f97cca904dc20932, type: 3}
   spr: {fileID: 1374403578}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &1374403581
 Rigidbody2D:
   serializedVersion: 4
@@ -1587,7 +1590,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374403577}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1610,7 +1613,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

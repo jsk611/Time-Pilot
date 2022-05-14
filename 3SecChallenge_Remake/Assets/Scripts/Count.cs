@@ -8,7 +8,7 @@ public class Count : MonoBehaviour
     [SerializeField] Image img; 
     void Update()
     {
-        img.fillAmount -= Time.deltaTime / 0.5f;
+        img.fillAmount -= Time.deltaTime / 0.75f;
         if (img.fillAmount <= 0)
             img.fillAmount = 1;
     }
