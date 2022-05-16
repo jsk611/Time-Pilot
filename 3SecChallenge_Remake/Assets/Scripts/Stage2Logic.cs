@@ -10,9 +10,9 @@ public class Stage2Logic : Stage
     void Start()
     {
         LoadInfo();
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 7; i++)
         {
-            int randNum = Random.Range(0, 4);
+            int randNum = Random.Range(0, 3);
             if (randNum != 0)
             {
                 GameObject g = Instantiate(cannon, spawnPoints[i].position, Quaternion.identity);

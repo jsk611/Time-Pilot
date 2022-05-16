@@ -13,7 +13,7 @@ public class Stage4Logic : MonoBehaviour
 
     IEnumerator SummonBalls()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         for(int i=0; i<4; i++)
         {
             Instantiate(ball, spawns[i].position, Quaternion.identity);

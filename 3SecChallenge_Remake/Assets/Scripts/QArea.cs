@@ -17,7 +17,7 @@ public class QArea : MonoBehaviour
         if (other.tag == "Player")
         {
             Color color = spr.color;
-            color.a = 0.8f;
+            color.a = 0.6f;
             spr.color = color;
 
             isTriggered = true;

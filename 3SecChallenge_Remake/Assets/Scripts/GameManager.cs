@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         timeBar.fillAmount = time / 3f;
 
-        Time.timeScale = score > 25000 ? 2f : 1f + 1f / (25000f / score); //시간 가속
+        Time.timeScale = score > 15000 ? 1.75f : 1f + 0.75f / (15000f / score); //시간 가속
     }
     private void FixedUpdate()
     {
@@ -107,8 +107,8 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (hp <= 0)
-            GameOver();
+        //if (hp <= 0)
+        //    GameOver();
     }
 
     public void NextStage()
