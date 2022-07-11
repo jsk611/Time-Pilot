@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     [SerializeField] GameObject[] hpImgs;
 
-    public float time;
-    [SerializeField] Image timeBar;
+    //public float time;
+    //[SerializeField] Image timeBar;
     public Image fade;
     [SerializeField] GameObject timeOutUI;
     [SerializeField] GameObject O, X, countdown;
-    bool success;
+    public bool success;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -27,23 +27,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(baseUI);
         DontDestroyOnLoad(walls);
         DontDestroyOnLoad(timeOutUI);
-        time = 3;
         hp = 4;
         NextStage();
     }
 
     private void Update()
     {
-
-        if (time > 0)
-            time -= Time.deltaTime;
-        else if(time < 0)
-        {
-            StartCoroutine(TimeOut());
-            time = 0;
-        }
-
-        timeBar.fillAmount = time / 3f;
 
         Time.timeScale = score > 15000 ? 1.75f : 1f + 0.75f / (15000f / score); //시간 가속
     }
@@ -53,7 +42,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
         
     }
-    IEnumerator TimeOut()
+    public IEnumerator TimeOut()
     {
         yield return new WaitForEndOfFrame();
         player.layer = 6;
@@ -88,12 +77,9 @@ public class GameManager : MonoBehaviour
     {
         success = true;
     }
-    public void Failed(bool timeover)
+    public void Failed()
     {
         success = false;
-        if (timeover)
-            time = 0.001f;
-
         DecreaseHp();
     }
     void DecreaseHp()
@@ -117,11 +103,10 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 5);
+            r = Random.Range(1, 6);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
         
         SceneManager.LoadScene("Stage "+r.ToString());
-        time = 3;
 
         StartCoroutine(FadeIn(fade, 0.3f));
         Succeed();

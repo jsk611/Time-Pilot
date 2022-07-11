@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball : Enemy
+public class Gear : MonoBehaviour
 {
-    float z = 0;
+    float z=0;
 
-    private void Start()
-    {
-        SetHp(6);
-    }
+    // Update is called once per frame
     void Update()
     {
         z += Time.deltaTime * 180;

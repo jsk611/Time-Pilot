@@ -39,6 +39,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -232,6 +233,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Cannon-sheet_2: 3903930982169192436
+      Cannon-sheet_1: -1911114288096505905
+      Cannon-sheet_3: -8464116732076846291
+      Cannon-sheet_4: -3876507513344252391
+      Cannon-sheet_0: 5632137517122798776
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

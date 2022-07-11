@@ -9,6 +9,7 @@ public class Stage2Logic : Stage
     // Start is called before the first frame update
     void Start()
     {
+        SetTime(3f);
         LoadInfo();
         for (int i = 0; i < 7; i++)
         {
@@ -24,8 +25,7 @@ public class Stage2Logic : Stage
 
     private void Update()
     {
-        //if (gameManager.time < 0 && player.layer == 3)
-        //    gameManager.Succeed();
-
+        Timer();
+        PlayerHit();
     }
 }

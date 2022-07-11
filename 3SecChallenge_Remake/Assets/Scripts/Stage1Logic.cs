@@ -55,13 +55,13 @@ public class Stage1Logic : Stage
 
             QAreas[i].GetComponentInChildren<TextMesh>().text = numArr[i + 3].ToString();
         }
-
+        SetTime(3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.time < 0)
+        if (time < 0)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -75,10 +75,13 @@ public class Stage1Logic : Stage
             }
             else
             {
-                gameManager.Failed(false);
+                gameManager.Failed();
 
             }
 
         }
+
+        Timer();
+        PlayerHit();
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Answer
   - DamagedPlayer
   - target
+  - StageManager
   layers:
   - Default
   - TransparentFX

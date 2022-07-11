@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     Vector2 mouse;
     [SerializeField] SpriteRenderer spr;
     [SerializeField] LayerMask layerMask;
+    public bool isHit;
     
     void Start()
     {
@@ -88,7 +89,7 @@ public class Player : MonoBehaviour
         yield return new WaitForEndOfFrame();
         string currentScene = SceneManager.GetActiveScene().name;
         gameObject.layer = 6;
-        gameManager.Failed(true);
+        isHit=true;
         while(currentScene == SceneManager.GetActiveScene().name)
         {
             StartCoroutine(FadeIn(spr, 0.5f));

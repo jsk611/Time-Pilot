@@ -24,18 +24,21 @@ public class Stage3Logic : Stage
 
             }
         }
-        
+        SetTime(3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameManager.time < 0)
+        if(time < 0)
         {
             if (GameObject.FindGameObjectWithTag("target") == null)
                 gameManager.Succeed();
             else
-                gameManager.Failed(false);
+                gameManager.Failed();
         }
+        Timer();
+        PlayerHit();
+
     }
 }
