@@ -29,11 +29,11 @@ public class Stage5Logic : Stage
     }
     IEnumerator Sniper()
     {
-        for(int i=0; i<4; i++)
+        for(int i=0; i<9; i++)
         {
             Sniper s = Instantiate(sniper, new Vector2(Random.Range(-5f,5f), Random.Range(-5f,5f)), Quaternion.identity).GetComponent<Sniper>();
             s.player = player;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
         }
     }

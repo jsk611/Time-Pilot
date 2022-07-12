@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 6);
+            r = Random.Range(1, 7);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
         
         SceneManager.LoadScene("Stage "+r.ToString());

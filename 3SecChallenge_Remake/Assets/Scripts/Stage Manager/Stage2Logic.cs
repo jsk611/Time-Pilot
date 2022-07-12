@@ -9,7 +9,7 @@ public class Stage2Logic : Stage
     // Start is called before the first frame update
     void Start()
     {
-        SetTime(3f);
+        SetTime(5f);
         LoadInfo();
         for (int i = 0; i < 7; i++)
         {

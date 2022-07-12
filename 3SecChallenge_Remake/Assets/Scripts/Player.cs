@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     float x, y;
     Vector2 mouse;
     [SerializeField] SpriteRenderer spr;
-    [SerializeField] LayerMask layerMask;
     public bool isHit;
     
     void Start()
@@ -107,4 +106,15 @@ public class Player : MonoBehaviour
             StartCoroutine(Damaged());
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            StartCoroutine(Damaged());
+        }
+    }
+
+
+
 }

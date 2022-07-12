@@ -8,19 +8,29 @@ public class Sniper : MonoBehaviour
     [SerializeField] GameObject particle;
     [SerializeField] CircleCollider2D col;
     float speed;
+    float x, y;
     // Start is called before the first frame update
     void Start()
     {
         //player = GameObject.Find("Player");
         StartCoroutine(MoveAndShoot());
+        StartCoroutine(RandomPos());
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(player.transform.position.x + x, player.transform.position.y + y), speed*Time.deltaTime);
     }
-
+    IEnumerator RandomPos()
+    {
+        while(true)
+        {
+            x = Random.Range(-1.5f, 1.5f);
+            y = Random.Range(-1.5f, 1.5f);
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
     IEnumerator MoveAndShoot()
     {
         while(true)
