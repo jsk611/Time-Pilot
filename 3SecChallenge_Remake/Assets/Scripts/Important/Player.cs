@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
-    public float speed;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject subBullet;
     bool reloading;
     float angle;
     float x, y;
@@ -15,9 +15,14 @@ public class Player : MonoBehaviour
     [SerializeField] SpriteRenderer spr;
     public bool isHit;
     
+    public float speed;
+    public float attackSpeed;
+    public bool[] shooters;
+
     void Start()
     {
-        
+        attackSpeed = 0.5f;
+        shooters = new bool[3]; //{후방, 좌우, 보조}
     }
 
     // Update is called once per frame
@@ -50,9 +55,22 @@ public class Player : MonoBehaviour
         if (!reloading)
         {
             Instantiate(bullet, transform.position, transform.rotation);
+            if(shooters[0])
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 180));
+            if(shooters[1])
+            {
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 90));
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 270));
+            }
+            if(shooters[2])
+            {
+                Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 15));
+                Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z -15));
+            }
+
             Debug.Log("발사");
             reloading = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(attackSpeed);
             reloading = false;
         }
         else

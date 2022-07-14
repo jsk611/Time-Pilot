@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject baseUI;
     public GameObject walls;
-    public int score, hp;
+    public int hp;
+    public float score;
     
     public Text scoreText;
     [SerializeField] GameObject[] hpImgs;
@@ -19,7 +20,11 @@ public class GameManager : MonoBehaviour
     public Image fade;
     [SerializeField] GameObject timeOutUI;
     [SerializeField] GameObject O, X, countdown;
+    [SerializeField] GameObject upgradeUI;
     public bool success;
+
+    int checkPoint;
+    int level;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -27,6 +32,10 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(baseUI);
         DontDestroyOnLoad(walls);
         DontDestroyOnLoad(timeOutUI);
+        DontDestroyOnLoad(upgradeUI);
+        score = 2022;
+        checkPoint = 1900;
+        level = 0;
         hp = 4;
         NextStage();
     }
@@ -38,12 +47,15 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             return;
         }
-        Time.timeScale = score > 15000 ? 1.75f : 1f + 0.75f / (15000f / score); //시간 가속
+        Time.timeScale = score <= 0 ? 1.75f : 1f + 0.75f * ((2022-score) / 2022); //시간 가속
+
+        if ((int)score == checkPoint)
+            Upgrade();
     }
     private void FixedUpdate()
     {
-        score += (int)(Time.deltaTime*150);
-        scoreText.text = score.ToString();
+        score -= Time.deltaTime*4;
+        scoreText.text = ((int)score).ToString();
         
     }
     public IEnumerator TimeOut()
@@ -100,7 +112,21 @@ public class GameManager : MonoBehaviour
         //if (hp <= 0)
         //    GameOver();
     }
+    public void IncreaseHp()
+    {
+        hp++;
+        for (int i = 0; i < hp; i++)
+        {
+            hpImgs[i].SetActive(true);
+        }
+    }
 
+    void Upgrade()
+    {
+        upgradeUI.SetActive(true);
+        upgradeUI.GetComponentInChildren<UpgradeLogic>().ResetChoice();
+        checkPoint -= 100 + 20 * level++;
+    }
     public void NextStage()
     {
         //랜덤 스테이지 이동
@@ -121,11 +147,12 @@ public class GameManager : MonoBehaviour
         //게임오버씬 이동
 
         if (score >= PlayerPrefs.GetInt("maxScore", 0))
-            PlayerPrefs.SetInt("maxScore", score);
+            PlayerPrefs.SetInt("maxScore", (int)score);
         Destroy(baseUI);
         Destroy(player);
         Destroy(walls);
         Destroy(timeOutUI);
+        Destroy(upgradeUI);
         Destroy(gameObject);
     }
 
