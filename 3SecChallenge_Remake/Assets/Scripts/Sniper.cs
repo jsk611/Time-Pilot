@@ -26,8 +26,8 @@ public class Sniper : MonoBehaviour
     {
         while(true)
         {
-            x = Random.Range(-1.5f, 1.5f);
-            y = Random.Range(-1.5f, 1.5f);
+            x = Random.Range(-1f, 1f);
+            y = Random.Range(-1f, 1f);
             yield return new WaitForSeconds(0.25f);
         }
     }

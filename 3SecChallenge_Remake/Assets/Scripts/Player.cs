@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
     IEnumerator Damaged()
     {
         yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         string currentScene = SceneManager.GetActiveScene().name;
         gameObject.layer = 6;
         isHit=true;

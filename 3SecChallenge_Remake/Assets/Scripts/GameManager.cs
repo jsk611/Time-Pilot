@@ -33,7 +33,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        if(Input.GetKey(KeyCode.P))
+        {
+            Time.timeScale = 0;
+            return;
+        }
         Time.timeScale = score > 15000 ? 1.75f : 1f + 0.75f / (15000f / score); //시간 가속
     }
     private void FixedUpdate()
@@ -103,7 +107,7 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 7);
+            r = Random.Range(1, 8);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
         
         SceneManager.LoadScene("Stage "+r.ToString());

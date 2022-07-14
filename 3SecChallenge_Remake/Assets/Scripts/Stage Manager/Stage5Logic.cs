@@ -33,7 +33,7 @@ public class Stage5Logic : Stage
         {
             Sniper s = Instantiate(sniper, new Vector2(Random.Range(-5f,5f), Random.Range(-5f,5f)), Quaternion.identity).GetComponent<Sniper>();
             s.player = player;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
 
         }
     }
