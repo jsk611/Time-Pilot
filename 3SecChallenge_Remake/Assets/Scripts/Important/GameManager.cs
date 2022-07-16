@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player;
     public GameObject baseUI;
-    public GameObject walls;
     public int hp;
     public float score;
     
@@ -30,7 +29,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(baseUI);
-        DontDestroyOnLoad(walls);
         DontDestroyOnLoad(timeOutUI);
         DontDestroyOnLoad(upgradeUI);
         score = 2022;
@@ -133,7 +131,7 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 8);
+            r = Random.Range(1, 9);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
         
         SceneManager.LoadScene("Stage "+r.ToString());
@@ -150,7 +148,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("maxScore", (int)score);
         Destroy(baseUI);
         Destroy(player);
-        Destroy(walls);
         Destroy(timeOutUI);
         Destroy(upgradeUI);
         Destroy(gameObject);

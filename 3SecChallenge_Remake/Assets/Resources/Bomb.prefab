@@ -138,4 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBomb: 1
   BOOM: {fileID: 6532316818211966669, guid: 7c5187cdd7847b94eb47b22c7938a41c, type: 3}
-  power: 7000
+  power: 84

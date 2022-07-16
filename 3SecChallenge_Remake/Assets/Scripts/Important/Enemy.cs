@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     protected int hp;
     protected int maxHp;
+    protected SpriteRenderer spr;
 
     [SerializeField] protected Image hpBar;
 
@@ -14,10 +15,12 @@ public class Enemy : MonoBehaviour
     {
         this.maxHp = maxHp;
         hp = maxHp;
+        
     }
     public void DecreaseHp()
     {
         hp--;
+        StartCoroutine(Damaged());
         if(hp <= 0)
         {
             Destroy(gameObject);
@@ -34,5 +37,12 @@ public class Enemy : MonoBehaviour
         {
             DecreaseHp();
         }
+    }
+    protected IEnumerator Damaged()
+    {
+        spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        spr.color = new Color(spr.color.r, spr.color.g, spr.color.b, 1f);
+
     }
 }

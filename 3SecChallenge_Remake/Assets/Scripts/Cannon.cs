@@ -6,7 +6,7 @@ public class Cannon : MonoBehaviour
 {
     public Transform player;
     public GameObject bullet;
-    public GameManager gameManager;
+    //public GameManager gameManager;
     [SerializeField] Animator anim;
 
     bool isDelay;

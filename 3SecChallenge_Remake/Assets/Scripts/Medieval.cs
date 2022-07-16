@@ -16,7 +16,8 @@ public class Medieval : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         float a = transform.rotation.eulerAngles.z;
-        rigid.AddForce(new Vector2(Mathf.Cos(a*Mathf.Deg2Rad), Mathf.Sin(a*Mathf.Deg2Rad)).normalized * power * Time.deltaTime, ForceMode2D.Impulse);
+        power = Random.Range(power, power + 15f);
+        rigid.AddForce(new Vector2(Mathf.Cos(a*Mathf.Deg2Rad), Mathf.Sin(a*Mathf.Deg2Rad)).normalized * power, ForceMode2D.Impulse);
         curPos = transform.position;
         pastPos = transform.position;
     }

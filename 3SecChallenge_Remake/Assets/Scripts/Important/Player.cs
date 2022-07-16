@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     float x, y;
     Vector2 mouse;
     [SerializeField] SpriteRenderer spr;
+    [SerializeField] Rigidbody2D rigid;
     public bool isHit;
     
     public float speed;
@@ -28,16 +29,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rigid.velocity = Vector2.zero;
         //이동
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         transform.Translate(new Vector2(x, y) * Time.deltaTime * speed, Space.World);
 
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        if (pos.x < 0f) pos.x = 0f;
-        if (pos.x > 1f) pos.x = 1f;
-        if (pos.y < 0f) pos.y = 0f;
-        if (pos.y > 1f) pos.y = 1f;
+        if (pos.x < 0f) pos.x = 0f;  
+        if (pos.x > 1f) pos.x = 1f;  
+        if (pos.y < 0f) pos.y = 0f; 
+        if (pos.y > 1f) pos.y = 1f;  
         transform.position = Camera.main.ViewportToWorldPoint(pos);
 
         //회전
