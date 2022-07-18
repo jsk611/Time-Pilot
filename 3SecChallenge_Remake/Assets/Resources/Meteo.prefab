@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3249532124955482773}
   - component: {fileID: 3249532124955482774}
   - component: {fileID: 5332368057431496269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Meteo
   m_TagString: enemy
   m_Icon: {fileID: 0}
