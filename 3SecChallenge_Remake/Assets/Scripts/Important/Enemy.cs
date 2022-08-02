@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public void DecreaseHp()
     {
         hp--;
-        StartCoroutine(Damaged());
+        //StartCoroutine(Damaged());
         if(hp <= 0)
         {
             Destroy(gameObject);
