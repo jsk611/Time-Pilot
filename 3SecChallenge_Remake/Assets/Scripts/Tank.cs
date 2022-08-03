@@ -10,8 +10,8 @@ public class Tank : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Move());
-        if (transform.rotation.z != 0)
-            particle.transform.position = new Vector2(transform.position.x - 2f, transform.position.y -1.5f);
+        //if (transform.rotation.z != 0)
+        //    particle.transform.position = new Vector2(transform.position.x - 2f, transform.position.y -1.5f);
 
     }
     private void Update()

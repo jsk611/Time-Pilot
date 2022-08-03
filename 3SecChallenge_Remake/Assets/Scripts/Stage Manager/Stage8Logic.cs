@@ -42,6 +42,7 @@ public class Stage8Logic : Stage
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(RotateCam2());
+        StartCoroutine(ZoomInOut());
         yield return new WaitForSeconds(1f);
         Destroy(wall.gameObject);
         cam.transform.position = new Vector3(0, 0, -10);
@@ -77,6 +78,21 @@ public class Stage8Logic : Stage
         }
         cam.transform.rotation = Quaternion.Euler(0, 0, 0);
 
+    }
+
+    IEnumerator ZoomInOut()
+    {
+        Camera c = cam.GetComponent<Camera>();
+        while(c.orthographicSize > 0)
+        {
+            c.orthographicSize -= 5 * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        while (c.orthographicSize < 5)
+        {
+            c.orthographicSize += 5 * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
     IEnumerator Meteo()
     {
