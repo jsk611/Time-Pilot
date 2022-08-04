@@ -48,7 +48,7 @@ public class Stage9Logic : Stage
         foreach(var i in stopT)
         {
             i.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.25f);
         }
         foreach(var i in stopT)
         {
@@ -77,11 +77,11 @@ public class Stage9Logic : Stage
         {
             int rand = Random.Range(0, 2);
             if (rand == 0)
-                Instantiate(obstacle, new Vector2(-10, Random.Range(4, -4)), Quaternion.identity);
+                Instantiate(obstacle, new Vector2(-10, Random.Range(4.5f, -4.5f)), Quaternion.identity);
             else
-                Instantiate(obstacle, new Vector2(10, Random.Range(4, -4)), Quaternion.Euler(0,0,180));
+                Instantiate(obstacle, new Vector2(10, Random.Range(4.5f, -4.5f)), Quaternion.Euler(0,0,180));
 
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.6f);
         }
 
     }

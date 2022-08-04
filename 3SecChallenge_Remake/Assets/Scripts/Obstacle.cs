@@ -8,8 +8,8 @@ public class Obstacle : Enemy
     [SerializeField] float speed;
     void Start()
     {
-        SetHp(Random.Range(2, 7));
-        speed = Random.Range(speed - 0.5f, speed + 1.5f);
+        SetHp(Random.Range(1, 7));
+        speed = 6f/hp;
     }
 
     // Update is called once per frame

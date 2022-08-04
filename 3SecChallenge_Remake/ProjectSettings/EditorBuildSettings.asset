@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/FirstSetting.unity
+    guid: 6c67b28c2ff0b934aad83e979ea7bbf4
+  - enabled: 1
     path: Assets/Scenes/Stage 1.unity
     guid: 10531873a2f228e45b116b8483403b82
   - enabled: 1
@@ -35,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 9.unity
     guid: c7562597162a19145952c91da58750ad
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 553f963a016966d42bfe898efabf58aa
   m_configObjects: {}

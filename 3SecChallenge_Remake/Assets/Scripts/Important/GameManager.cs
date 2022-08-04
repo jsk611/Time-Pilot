@@ -107,8 +107,8 @@ public class GameManager : MonoBehaviour
         }
 
 
-        //if (hp <= 0)
-        //    GameOver();
+        if (hp <= 0)
+            StartCoroutine(GameOver());
     }
     public void IncreaseHp()
     {
@@ -133,19 +133,22 @@ public class GameManager : MonoBehaviour
         {
             r = Random.Range(1, 10);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
-        //r = 9;
+        //r = 4;
         SceneManager.LoadScene("Stage "+r.ToString());
 
         StartCoroutine(FadeIn(fade, 0.3f));
         Succeed();
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
-        //게임오버씬 이동
-
         if (score >= PlayerPrefs.GetInt("maxScore", 0))
             PlayerPrefs.SetInt("maxScore", (int)score);
+        //게임오버씬 이동
+        StartCoroutine(FadeOut(fade, 1f));
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("GameOver");
+
         Destroy(baseUI);
         Destroy(player);
         Destroy(timeOutUI);
