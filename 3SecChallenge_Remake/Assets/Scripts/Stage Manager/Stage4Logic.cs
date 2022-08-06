@@ -12,9 +12,8 @@ public class Stage4Logic : Stage
         LoadInfo();
         StartCoroutine(SummonBalls());
         SetTime(10f);
-        int r = Random.Range(0, 2);
-        if (r == 1)
-            StartCoroutine(RotateCam());
+
+        StartCoroutine(RotateCam());
     }
 
     private void Update()
@@ -36,7 +35,7 @@ public class Stage4Logic : Stage
     }
     IEnumerator RotateCam()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         float a = 0;
         while(time >= 0)
         {
