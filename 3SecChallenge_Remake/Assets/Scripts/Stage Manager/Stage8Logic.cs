@@ -9,6 +9,8 @@ public class Stage8Logic : Stage
     [SerializeField] Animator wall;
     [SerializeField] Rigidbody2D rock;
     [SerializeField] float rockSpeed;
+    [SerializeField] SpriteRenderer background;
+    [SerializeField] Sprite img;
     bool cameraMoving;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class Stage8Logic : Stage
     }
     IEnumerator ResetPos()
     {
+        background.sprite = img;
         yield return new WaitForSeconds(1f);
         StartCoroutine(RotateCam2());
         StartCoroutine(ZoomInOut());

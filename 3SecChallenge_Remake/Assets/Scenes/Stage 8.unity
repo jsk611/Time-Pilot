@@ -417,7 +417,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: d8e14a183a0cadc43b072d302409135e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2844,6 +2844,8 @@ MonoBehaviour:
   wall: {fileID: 207694998}
   rock: {fileID: 673270712}
   rockSpeed: 9
+  background: {fileID: 102467096}
+  img: {fileID: 21300000, guid: 901478eac5c04d943aaa6c9d90f1c40e, type: 3}
 --- !u!1 &1321525833
 GameObject:
   m_ObjectHideFlags: 0

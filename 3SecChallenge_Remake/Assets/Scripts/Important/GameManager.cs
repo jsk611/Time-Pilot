@@ -131,9 +131,9 @@ public class GameManager : MonoBehaviour
         int r;
         do
         {
-            r = Random.Range(1, 10);
+            r = Random.Range(1, 11);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
-        //r = 4;
+        //r = 10;
         SceneManager.LoadScene("Stage "+r.ToString());
 
         StartCoroutine(FadeIn(fade, 0.3f));
