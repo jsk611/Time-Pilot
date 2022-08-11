@@ -27,7 +27,7 @@ public class LaserShooter : MonoBehaviour
             a += Time.deltaTime * 720;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.4f);
         Instantiate(laser, transform.position, transform.rotation);
         Destroy(gameObject, 0.5f);
     }

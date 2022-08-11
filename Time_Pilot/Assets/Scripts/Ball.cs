@@ -8,7 +8,7 @@ public class Ball : Enemy
 
     private void Start()
     {
-        SetHp(10);
+        SetHp(16);
     }
     void Update()
     {

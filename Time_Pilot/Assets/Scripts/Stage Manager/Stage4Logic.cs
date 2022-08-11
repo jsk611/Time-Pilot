@@ -37,10 +37,24 @@ public class Stage4Logic : Stage
     {
         yield return new WaitForSeconds(4f);
         float a = 0;
-        while(time >= 0)
+        while(a <= 60f && time>0)
         {
             cam.transform.rotation = Quaternion.AngleAxis(a, Vector3.forward);
-            a += Time.deltaTime * 60f;
+            a += Time.deltaTime * 40f;
+            yield return new WaitForEndOfFrame();
+        }
+        //yield return new WaitForSeconds(0.5f);
+        while (a >= -60f && time > 0)
+        {
+            cam.transform.rotation = Quaternion.AngleAxis(a, Vector3.forward);
+            a -= Time.deltaTime * 40f;
+            yield return new WaitForEndOfFrame();
+        }
+        //yield return new WaitForSeconds(0.5f);
+        while (a <= 0f && time > 0)
+        {
+            cam.transform.rotation = Quaternion.AngleAxis(a, Vector3.forward);
+            a += Time.deltaTime * 40f;
             yield return new WaitForEndOfFrame();
         }
         cam.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);

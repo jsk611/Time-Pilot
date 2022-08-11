@@ -16,7 +16,7 @@ public class Stage8Logic : Stage
     void Start()
     {
         LoadInfo();
-        SetTime(40f);
+        SetTime(30f);
         Invoke("AddForceToRock", 2.5f);
         StartCoroutine(RotateCam1());
     }

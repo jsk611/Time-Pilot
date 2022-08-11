@@ -9,7 +9,7 @@ public class Obstacle : Enemy
     void Start()
     {
         SetHp(Random.Range(1, 7));
-        speed = 6f/hp;
+        speed = 8f/hp;
     }
 
     // Update is called once per frame

@@ -17,7 +17,7 @@ public class Mosquito : Enemy
 
     void Start()
     {
-        SetHp(5);
+        SetHp(6);
         rigid = GetComponent<Rigidbody2D>();
         StartCoroutine(StartMoving());
         //StartCoroutine(SetRandom());

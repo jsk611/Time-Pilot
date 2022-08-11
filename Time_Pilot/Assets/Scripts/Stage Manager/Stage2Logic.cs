@@ -34,12 +34,12 @@ public class Stage2Logic : Stage
     IEnumerator Laser()
     {
         yield return new WaitForSeconds(5f); 
-        for(int i=0; i<12; i++)
+        for(int i=0; i<18; i++)
         {
             Vector2 randPos = new Vector2(Random.Range(-8, 8), Random.Range(-4, 4));
             GameObject l = Instantiate(laserShooter, randPos, Quaternion.identity);
             l.GetComponent<LaserShooter>().player = player.transform;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
         
     }

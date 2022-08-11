@@ -14,7 +14,7 @@ public class Stage9Logic : Stage
     void Start()
     {
         LoadInfo();
-        SetTime(20f);
+        SetTime(15f);
         StartCoroutine(Stop());
     }
 
