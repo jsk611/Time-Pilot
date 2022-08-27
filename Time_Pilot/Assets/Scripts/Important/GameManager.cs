@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     int checkPoint;
     int level;
+
+    bool isCheckpoint;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -48,9 +50,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = score <= 0 ? 1.75f : 1f + 0.75f * ((2022-score) / 2022); //시간 가속
 
         if ((int)score == checkPoint)
-            Upgrade();
+            isCheckpoint = true;
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         score -= Time.deltaTime*4;
         scoreText.text = ((int)score).ToString();
@@ -71,7 +73,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         O.SetActive(false);
         X.SetActive(false);
-
+        if(isCheckpoint)
+        {
+            Upgrade();
+            isCheckpoint = false;
+        }
+        yield return new WaitForSeconds(0.01f);
         countdown.SetActive(true);
         Text count = countdown.GetComponentInChildren<Text>();
         for(int i=3; i>0; i--)
@@ -142,8 +149,31 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
-        if (score >= PlayerPrefs.GetInt("maxScore", 0))
+        PlayerPrefs.SetInt("score", (int)score);
+
+        string[] grade = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+            "13", "14", "15", "16", "17", "18","19","20","21","22","23","24","25" };
+        int i = 0;
+        while(i<25)
+        {
+            if(score >= (19-i)*100)
+            {
+                PlayerPrefs.SetString("grade", grade[i]);
+                break;
+            }
+            i++;
+        }
+        if(i >= 25)
+            PlayerPrefs.SetString("grade", grade[24]);
+
+
+        if (score < PlayerPrefs.GetInt("maxScore", 0))
+        {
             PlayerPrefs.SetInt("maxScore", (int)score);
+            PlayerPrefs.SetString("maxGrade", PlayerPrefs.GetString("grade", "error"));
+            PlayerPrefs.SetInt("isUpdated", 1);
+        }
+        else PlayerPrefs.SetInt("isUpdated", 0);
         //게임오버씬 이동
         StartCoroutine(FadeOut(fade, 1f));
         yield return new WaitForSeconds(1f);

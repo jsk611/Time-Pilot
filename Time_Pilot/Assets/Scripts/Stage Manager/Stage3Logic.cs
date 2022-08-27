@@ -9,15 +9,15 @@ public class Stage3Logic : Stage
     void Start()
     {
         LoadInfo();
-        int r = Random.Range(1, 3);
+        int r = Random.Range(1, 4);
         if(r==1)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
                 Instantiate(target, new Vector2(Random.Range(-8, 8), Random.Range(-4, 4)), Quaternion.identity);
         }
         else
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 float x = Random.Range(-8f, 8f);
                 Instantiate(movingTarget, new Vector2(x, Random.Range(-4, 4)), Quaternion.identity);

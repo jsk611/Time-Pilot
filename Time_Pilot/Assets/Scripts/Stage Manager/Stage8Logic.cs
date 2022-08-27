@@ -19,6 +19,8 @@ public class Stage8Logic : Stage
         SetTime(30f);
         Invoke("AddForceToRock", 2.5f);
         StartCoroutine(RotateCam1());
+        cameraMoving = true;
+        player.transform.position = Vector2.zero;
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ public class Stage6Logic : Stage
 {
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject bomb;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,4 +49,5 @@ public class Stage6Logic : Stage
             yield return new WaitForSeconds(Random.Range(0.5f, 0.75f));
         }
     }
+    
 }

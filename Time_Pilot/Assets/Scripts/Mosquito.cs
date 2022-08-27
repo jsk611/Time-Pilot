@@ -6,7 +6,9 @@ public class Mosquito : Enemy
 {
     public GameObject player;
     [SerializeField] Transform childPos;
+
     [SerializeField] Animator anim;
+
     Rigidbody2D rigid;
     
     float targetX;

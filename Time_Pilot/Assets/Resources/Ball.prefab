@@ -137,3 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
+  damagedEvent: {fileID: 0}
+  destroyEvent: {fileID: 7008572805878860055, guid: e6db2a712ddc6674fb8685f98fe470dd, type: 3}
