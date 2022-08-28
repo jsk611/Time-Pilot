@@ -9,10 +9,14 @@ public class Sniper : MonoBehaviour
     [SerializeField] CircleCollider2D col;
     float speed;
     float x, y;
+
+    [SerializeField] AudioClip clip;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        //player = GameObject.Find("Player");
+        audioSource = gameObject.GetComponent<AudioSource>();
+
         StartCoroutine(MoveAndShoot());
         StartCoroutine(RandomPos());
     }
@@ -40,6 +44,7 @@ public class Sniper : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             speed = 1f;
             yield return new WaitForSeconds(0.05f);
+            audioSource.PlayOneShot(clip);
             col.enabled = true;
             Instantiate(particle, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.2f);

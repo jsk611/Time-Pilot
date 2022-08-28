@@ -13,12 +13,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Image hpBar;
     [SerializeField] protected ParticleSystem damagedEvent;
     [SerializeField] protected GameObject destroyEvent;
-
+    [SerializeField] protected AudioClip deathClip;
+    GameManager gameManager;
     protected void SetHp(int maxHp)
     {
         this.maxHp = maxHp;
         hp = maxHp;
         spr = GetComponent<SpriteRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
         if (spr == null)
             spr = GetComponentInChildren<SpriteRenderer>();
     }
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
             if (destroyEvent != null)
                 Instantiate(destroyEvent, transform.position, Quaternion.identity);
 
+            gameManager.sound.Play(deathClip, Define.Sound.Effect);
             Destroy(gameObject);
         }
     }

@@ -7,9 +7,13 @@ public class LaserShooter : MonoBehaviour
     public Transform player;
     public GameObject laser;
     float angle;
+    [SerializeField] AudioClip clip;
+
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         Vector2 dir = player.position - transform.position;
 
         // 타겟 방향으로 회전함
@@ -27,8 +31,10 @@ public class LaserShooter : MonoBehaviour
             a += Time.deltaTime * 720;
             yield return new WaitForEndOfFrame();
         }
+        audioSource.PlayOneShot(clip);
         yield return new WaitForSeconds(0.4f);
         Instantiate(laser, transform.position, transform.rotation);
+        
         Destroy(gameObject, 0.5f);
     }
 }

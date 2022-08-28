@@ -134,6 +134,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   damagedEvent: {fileID: 0}
   destroyEvent: {fileID: 7008572805878860055, guid: e6db2a712ddc6674fb8685f98fe470dd, type: 3}
+  deathClip: {fileID: 8300000, guid: 926d6ac59365cd14292303230fdc9326, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 256

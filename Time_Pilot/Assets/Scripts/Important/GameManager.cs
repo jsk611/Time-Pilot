@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour 
 {
@@ -26,8 +27,14 @@ public class GameManager : MonoBehaviour
     int level;
 
     bool isCheckpoint;
+
+    [SerializeField] AudioMixerGroup bgm, effect;
+    public SoundManager sound = new SoundManager();
+    [SerializeField] AudioClip[] clips;
+
     void Start()
     {
+        sound.Init(bgm, effect);
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(baseUI);
@@ -64,10 +71,12 @@ public class GameManager : MonoBehaviour
         player.layer = 6;
         if(success)
         {
+            sound.Play(clips[0], Define.Sound.Effect, 1, 0.5f);
             O.SetActive(true);
         }
         else
         {
+            sound.Play(clips[1], Define.Sound.Effect, 1, 0.5f);
             X.SetActive(true);
         }
         yield return new WaitForSeconds(0.75f);
@@ -85,12 +94,13 @@ public class GameManager : MonoBehaviour
         {
             //countdown
             count.text = i.ToString();
-            
+            sound.Play(clips[2], Define.Sound.Effect);
             if (i == 1)
                 StartCoroutine(FadeOut(fade, 0.75f));
             yield return new WaitForSeconds(0.75f);
         }
         countdown.SetActive(false);
+        sound.Play(clips[2], Define.Sound.Effect, 2);
         NextStage();
         player.layer = 3;
     }
@@ -140,7 +150,7 @@ public class GameManager : MonoBehaviour
         {
             r = Random.Range(1, 11);
         } while (("Stage " + r.ToString()).Equals(SceneManager.GetActiveScene().name));
-        //r = 2;
+        //r = 3;
         SceneManager.LoadScene("Stage "+r.ToString());
 
         StartCoroutine(FadeIn(fade, 0.3f));
@@ -210,4 +220,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         } while (image.color.a < 1);
     }
+
+    
 }

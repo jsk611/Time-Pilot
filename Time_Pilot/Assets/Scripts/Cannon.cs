@@ -12,10 +12,11 @@ public class Cannon : MonoBehaviour
     bool isDelay;
     float dTime;
 
-
+    [SerializeField] AudioClip clip;
+    AudioSource audioSource;
     private void Start()
     {
-
+        audioSource = gameObject.GetComponent<AudioSource>();
         isDelay = true;
         dTime = 1f;
         StartCoroutine(ShootCoroutine());
@@ -25,7 +26,7 @@ public class Cannon : MonoBehaviour
     {
         yield return new WaitForSeconds(dTime);
         isDelay = false;
-
+        audioSource.PlayOneShot(clip);
     }
 
     // Update is called once per frame

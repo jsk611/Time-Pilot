@@ -9,6 +9,7 @@ public class movingTarget : Target
     private void Start()
     {
         speed = transform.position.x <= 0 ? Random.Range(5f, 8f) : Random.Range(-8f,-5f);
+        SetHp(1);
     }
     void Update()
     {
