@@ -22,7 +22,7 @@ public class Machumbup : Enemy
 
     private void OnDestroy()
     {
-        if (isAnswer && hp==0)
+        if (isAnswer && hp<=0)
             Instantiate(WRONG, transform.position, Quaternion.identity);
     }
 

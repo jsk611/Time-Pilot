@@ -152,13 +152,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43fba64e556f5349a7c352a5328d876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score1: {fileID: 1723980754}
-  grade1: {fileID: 1090531064}
   updateT: {fileID: 947273072}
   btn1: {fileID: 1926464896}
   btn2: {fileID: 849578774}
+  score1: {fileID: 1723980756}
   score2: {fileID: 1867904759}
+  grade1: {fileID: 1090531066}
   grade2: {fileID: 1498487404}
+  background: {fileID: 2007335136}
+  backgroundImgs:
+  - {fileID: 21300000, guid: 697b5434cf274d547854d8f55ba52231, type: 3}
+  - {fileID: 21300000, guid: ad60d42b19f107a4e99f202e1046144a, type: 3}
+  - {fileID: 21300000, guid: 9891a646ae801c44ba7f1b9781ed025c, type: 3}
+  - {fileID: 21300000, guid: 74047c1e97eacd04fbbde41cab43dfdc, type: 3}
+  - {fileID: 21300000, guid: 08ef8e056dffb7e48a068c7f745f58ed, type: 3}
+  - {fileID: 21300000, guid: d8e14a183a0cadc43b072d302409135e, type: 3}
 --- !u!4 &62156025
 Transform:
   m_ObjectHideFlags: 0
@@ -551,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0.7433063, b: 0.2009167, a: 1}
+  m_Color: {r: 0.042452812, g: 1, b: 0.98299253, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -677,7 +685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1090531065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -731,7 +739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uB4F1\uAE09 :"
+  m_Text: 
 --- !u!222 &1090531067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -757,7 +765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1498487403
 RectTransform:
   m_ObjectHideFlags: 0
@@ -811,7 +819,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC5B4\uB5A4 \uC778\uBB3C"
+  m_Text: 
 --- !u!222 &1498487405
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -917,7 +925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1723980755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -971,7 +979,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uB3C4\uCC29\uD55C \uC5F0\uB3C4 : "
+  m_Text: 
 --- !u!222 &1723980757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -997,7 +1005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1867904758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1051,7 +1059,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 2022 A.D
+  m_Text: 
 --- !u!222 &1867904760
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1356,7 +1364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9891a646ae801c44ba7f1b9781ed025c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08ef8e056dffb7e48a068c7f745f58ed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
