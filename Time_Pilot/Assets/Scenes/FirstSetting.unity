@@ -3278,6 +3278,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
   - {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   bgmClip: {fileID: 8300000, guid: d66ffd761ff21c14cbe70057f2cf60d0, type: 3}
+  handicap: 0
 --- !u!4 &1824076689
 Transform:
   m_ObjectHideFlags: 0
@@ -3619,11 +3620,15 @@ MonoBehaviour:
   gameManager: {fileID: 1824076688}
   imgs:
   - {fileID: 21300000, guid: 3700f91dcc4a9e441b79b7174fa8834d, type: 3}
-  - {fileID: 21300000, guid: 1d1634c654da91e4c87052253b96eddb, type: 3}
+  - {fileID: 21300000, guid: 00566068b93260c40ab69399fa5a6add, type: 3}
   - {fileID: 21300000, guid: f3301179c30467449849ab2113cda687, type: 3}
-  - {fileID: -8464116732076846291, guid: f8f20d6ac538be34293281521f75796f, type: 3}
-  - {fileID: 3903930982169192436, guid: f8f20d6ac538be34293281521f75796f, type: 3}
-  - {fileID: -1911114288096505905, guid: f8f20d6ac538be34293281521f75796f, type: 3}
+  - {fileID: 21300000, guid: 1517860655f215b4986eec0af9c7dd9f, type: 3}
+  - {fileID: 21300000, guid: 0515feb3732ab2c499a84eb2daf946f6, type: 3}
+  - {fileID: 21300000, guid: f5d437fe69fdc8b4c8383803eb4e9ea5, type: 3}
+  - {fileID: 21300000, guid: 06e4f5c929f233242acc7fcf6d745b0c, type: 3}
+  - {fileID: 21300000, guid: 681dae9625845f447b9b36bc40bf9ec0, type: 3}
+  - {fileID: 21300000, guid: acf0c18927e2b23458213babdb646e1f, type: 3}
+  - {fileID: 21300000, guid: 7f291acb33fc90a428ba4fddb7a64672, type: 3}
   canvas: {fileID: 340477445}
 --- !u!1 &1977075764
 GameObject:

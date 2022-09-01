@@ -55,7 +55,7 @@ public class Stage1Logic : Stage
 
             QAreas[i].GetComponentInChildren<TextMesh>().text = numArr[i + 3].ToString();
         }
-        SetTime(3f);
+        SetTime(3f, true);
     }
 
     // Update is called once per frame

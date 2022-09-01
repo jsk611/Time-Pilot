@@ -76,7 +76,7 @@ public class Lobby : MonoBehaviour
     {
         float sound = master.value * 60 - 40;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
-        else audioMixer.SetFloat("bgm", sound);
+        else audioMixer.SetFloat("master", sound);
         PlayerPrefs.SetFloat("master",master.value);
     }
     public void BGMCtl()
@@ -90,7 +90,7 @@ public class Lobby : MonoBehaviour
     {
         float sound = bgm.value * 60 - 40;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
-        else audioMixer.SetFloat("bgm", sound);
+        else audioMixer.SetFloat("effect", sound);
         PlayerPrefs.SetFloat("effect", effect.value);
     }
     IEnumerator BackgroundChange()

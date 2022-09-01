@@ -24,7 +24,7 @@ public class Stage3Logic : Stage
 
             }
         }
-        SetTime(4f);
+        SetTime(4f, true);
     }
 
     // Update is called once per frame

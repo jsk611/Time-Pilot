@@ -5,6 +5,23 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
+public class PiggyBank
+{
+    public int startPoint;
+    int point;
+    public bool isEarned = false;
+    public void Init(int point)
+    {
+        this.startPoint = point;
+        this.point = startPoint;
+    }
+    public void ReachCheckpoint()
+    {
+        this.point--;
+        if (point == 0)
+            isEarned = true;
+    }
+}
 public class GameManager : MonoBehaviour 
 {
     public GameObject player;
@@ -33,7 +50,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip[] clips;
     [SerializeField] AudioClip bgmClip;
 
+    public List<PiggyBank> piggyBanks = new List<PiggyBank>();
 
+    public float handicap = 0;
     void Start()
     {
         sound.Init(bgm, effect);
@@ -143,6 +162,20 @@ public class GameManager : MonoBehaviour
     {
         upgradeUI.SetActive(true);
         upgradeUI.GetComponentInChildren<UpgradeLogic>().ResetChoice();
+        foreach (PiggyBank p in piggyBanks)
+        {
+            p.ReachCheckpoint();
+            if (p.isEarned)
+            {
+                if (p.startPoint == 3)
+                {
+                    IncreaseHp();
+                    piggyBanks.Remove(p);
+                }
+                IncreaseHp();
+            }
+        }
+        
         checkPoint -= 100 + 20 * level++;
     }
     public void NextStage()

@@ -10,8 +10,8 @@ public class Stage2Logic : Stage
     // Start is called before the first frame update
     void Start()
     {
-        SetTime(12f);
         LoadInfo();
+        SetTime(12f);
         for (int i = 0; i < 6; i++)
         {
             int randNum = Random.Range(0, 3);

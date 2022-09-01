@@ -55,7 +55,7 @@ public class Stage10Logic : Stage
             foreach(var p in points)
             {
                 int rand = Random.Range(0, 3);
-                if (rand != 1)
+                if (rand == 1)
                 {
                     Instantiate(lightning, p.position, Quaternion.identity, cam.transform);
                 }

@@ -24,6 +24,11 @@ public class Stage : MonoBehaviour
         this.time = time;
         this.timeLimit = time;
     }
+    public void SetTime(float time, bool timeAttack)
+    {
+        this.time = time + gameManager.handicap;
+        this.timeLimit = time + gameManager.handicap;
+    }
     public void Timer()
     {
         if (time > 0)

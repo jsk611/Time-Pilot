@@ -56,8 +56,8 @@ public class Stage8Logic : Stage
     }
     void AddForceToRock()
     {
-        rock.AddForce(Vector2.right * 1000f * Time.deltaTime, ForceMode2D.Impulse);
-        rock.velocity = Vector2.right * rockSpeed;
+        rock.AddForce(Vector2.right * 200 * player.GetComponent<Player>().speed * Time.deltaTime, ForceMode2D.Impulse);
+        rock.velocity = Vector2.right * rockSpeed/5f * player.GetComponent<Player>().speed;
         cameraMoving = true;
     }
     IEnumerator RotateCam1()
