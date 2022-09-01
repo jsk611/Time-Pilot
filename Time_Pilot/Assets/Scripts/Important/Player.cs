@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float attackSpeed;
     public bool[] shooters;
+    public GameObject[] shooterImgs;
 
     [SerializeField] AudioClip clip;
     void Start()
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
         //발사
         if (Input.GetMouseButton(0))
             StartCoroutine(Shoot());
+
     }
 
     IEnumerator Shoot()
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour
                 Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 15));
                 Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z -15));
             }
-            gameManager.sound.Play(clip, Define.Sound.Effect, 1.8f, 0.1f);
+            //gameManager.sound.Play(clip, Define.Sound.Effect, 1.8f, 0.1f);
             Debug.Log("발사");
             reloading = true;
             yield return new WaitForSeconds(attackSpeed);

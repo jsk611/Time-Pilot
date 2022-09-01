@@ -68,5 +68,10 @@ public class SoundManager
             audioSource.PlayOneShot(audioClip);
         }
     }
+    public void ChangePitch(float pitch)
+    {
+        AudioSource audioSource = _audioSources[(int)Define.Sound.Bgm];
+        audioSource.pitch = pitch;
+    }
 }
 

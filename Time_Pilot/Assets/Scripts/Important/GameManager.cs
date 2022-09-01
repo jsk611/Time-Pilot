@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioMixerGroup bgm, effect;
     public SoundManager sound = new SoundManager();
     [SerializeField] AudioClip[] clips;
+    [SerializeField] AudioClip bgmClip;
+
 
     void Start()
     {
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
         level = 0;
         hp = 4;
         NextStage();
+        sound.Play(bgmClip, Define.Sound.Bgm, 1, 0.3f);
     }
 
     private void Update()
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Time.timeScale = score <= 0 ? 1.75f : 1f + 0.75f * ((2022-score) / 2022); //시간 가속
-
+        sound.ChangePitch(Time.timeScale);
         if ((int)score == checkPoint)
             isCheckpoint = true;
     }
@@ -177,7 +180,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetString("grade", grade[24]);
 
 
-        if (score < PlayerPrefs.GetInt("maxScore", 0))
+        if (score < PlayerPrefs.GetInt("maxScore", 9999))
         {
             PlayerPrefs.SetInt("maxScore", (int)score);
             PlayerPrefs.SetString("maxGrade", PlayerPrefs.GetString("grade", "error"));
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
         Destroy(timeOutUI);
         Destroy(upgradeUI);
         Destroy(gameObject);
+        Destroy(GameObject.Find("@Sound"));
     }
 
     public IEnumerator FadeIn(Image image, float time)

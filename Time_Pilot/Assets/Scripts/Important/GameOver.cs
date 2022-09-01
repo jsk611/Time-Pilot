@@ -27,6 +27,8 @@ public class GameOver : MonoBehaviour
         background.sprite = backgroundImgs[i];
 
         StartCoroutine(GameOverRoutine());
+
+        Time.timeScale = 1f;
     }
     public void Restart()
     {
@@ -43,38 +45,38 @@ public class GameOver : MonoBehaviour
         foreach(var i in msg1)
         {
             score1.text += i;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         int t = PlayerPrefs.GetInt("score");
         string msg = Mathf.Abs(t).ToString() + (t >= 0 ? " A.D" : " B.C");
         foreach (var i in msg)
         {
             score2.text += i;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }       
         if (PlayerPrefs.GetInt("isUpdated") == 1)
             updateT.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
 
         foreach (var i in msg2)
         {
             grade1.text += i;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         foreach (var i in PlayerPrefs.GetString("grade"))
         {
             grade2.text += i;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         btn1.SetActive(true);
         btn2.SetActive(true);

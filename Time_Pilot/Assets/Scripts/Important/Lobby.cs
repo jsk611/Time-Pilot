@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class Lobby : MonoBehaviour
 {
@@ -11,10 +12,20 @@ public class Lobby : MonoBehaviour
     [SerializeField] GameObject countdown, b1,b2,b3;
     [SerializeField] Image background;
     [SerializeField] List<Sprite> imgs;
+    [SerializeField] GameObject option;
+
+    [SerializeField] Slider master;
+    [SerializeField] Slider bgm;
+    [SerializeField] Slider effect;
+    [SerializeField] AudioMixer audioMixer;
     int idx = 7;
 
+    bool isFullScreen;
+    [SerializeField] Button fullScreenBtn;
     private void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
+        isFullScreen = true;
         high.text = "HIGH : " + PlayerPrefs.GetInt("maxScore", 2022).ToString();
         grade.text = "등급 : " + PlayerPrefs.GetString("maxGrade", "데이터 없음");
 
@@ -26,6 +37,10 @@ public class Lobby : MonoBehaviour
         else if (t >= -3000) idx = 12;
         else idx = 13;
         StartCoroutine(BackgroundChange());
+
+        master.value = PlayerPrefs.GetFloat("master", 0.6f);
+        bgm.value = PlayerPrefs.GetFloat("bgm", 0.6f);
+        effect.value = PlayerPrefs.GetFloat("effect", 0.6f);
     }
     public void GameStart()
     {
@@ -34,6 +49,49 @@ public class Lobby : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    public void Option()
+    {
+        option.SetActive(!option.activeSelf);
+    }
+    public void FullScreen()
+    {
+        if(isFullScreen)
+        {
+            Screen.SetResolution(960, 540, false);
+            fullScreenBtn.GetComponent<Image>().color = new Color(1, 0.5f, 0.45f);
+            fullScreenBtn.GetComponentInChildren<Text>().text = "X";
+            isFullScreen = false;
+        }
+        else
+        {
+            Screen.SetResolution(1920, 1080, true);
+            fullScreenBtn.GetComponent<Image>().color = new Color(0.75f, 0.95f, 0.44f);
+            fullScreenBtn.GetComponentInChildren<Text>().text = "○";
+            isFullScreen = true;
+        }
+        
+    }
+    public void MasterCtl()
+    {
+        float sound = master.value * 60 - 40;
+        if (sound == -20) audioMixer.SetFloat("bgm", -80f);
+        else audioMixer.SetFloat("bgm", sound);
+        PlayerPrefs.SetFloat("master",master.value);
+    }
+    public void BGMCtl()
+    {
+        float sound = bgm.value * 60 - 40;
+        if (sound == -20) audioMixer.SetFloat("bgm", -80f);
+        else audioMixer.SetFloat("bgm", sound);
+        PlayerPrefs.SetFloat("bgm", bgm.value);
+    }
+    public void EffectCtl()
+    {
+        float sound = bgm.value * 60 - 40;
+        if (sound == -20) audioMixer.SetFloat("bgm", -80f);
+        else audioMixer.SetFloat("bgm", sound);
+        PlayerPrefs.SetFloat("effect", effect.value);
     }
     IEnumerator BackgroundChange()
     {

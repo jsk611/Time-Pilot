@@ -84,6 +84,7 @@ public class UpgradeLogic : MonoBehaviour
     void BackShooter()
     {
         player.shooters[0] = true;
+        player.shooterImgs[0].SetActive(true);
         player.attackSpeed += 0.15f;
         Debug.Log("공격속도 " + player.attackSpeed);
         Chosen();
@@ -91,6 +92,8 @@ public class UpgradeLogic : MonoBehaviour
     void LRShooter()
     {
         player.shooters[1] = true;
+        player.shooterImgs[1].SetActive(true);
+        player.shooterImgs[2].SetActive(true);
         player.attackSpeed += 0.15f;
         Debug.Log("공격속도 " + player.attackSpeed);
         Chosen();
@@ -98,6 +101,7 @@ public class UpgradeLogic : MonoBehaviour
     void SubShooter()
     {
         player.shooters[2] = true;
+        player.shooterImgs[3].SetActive(true);
         player.attackSpeed += 0.3f;
         Debug.Log("공격속도 " + player.attackSpeed);
         Chosen();

@@ -9,6 +9,7 @@ public class Stage10Logic : Stage
 
     [SerializeField] Transform[] points;
     [SerializeField] GameObject lightning;
+    [SerializeField] AudioClip clip1;
     void Start()
     {
         LoadInfo();
@@ -54,9 +55,13 @@ public class Stage10Logic : Stage
             foreach(var p in points)
             {
                 int rand = Random.Range(0, 3);
-                if (rand == 1)
+                if (rand != 1)
+                {
                     Instantiate(lightning, p.position, Quaternion.identity, cam.transform);
+                }
             }
+            yield return new WaitForSeconds(1f);
+            gameManager.sound.Play(clip1, Define.Sound.Effect);
             yield return new WaitForSeconds(4f);
         }
     }
