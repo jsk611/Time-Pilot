@@ -24,6 +24,7 @@ public class LaserShooter : MonoBehaviour
 
     IEnumerator Rotating()
     {
+        audioSource.PlayOneShot(clip);
         float a = 0;
         while(a<=360)
         {
@@ -31,7 +32,6 @@ public class LaserShooter : MonoBehaviour
             a += Time.deltaTime * 720;
             yield return new WaitForEndOfFrame();
         }
-        audioSource.PlayOneShot(clip);
         yield return new WaitForSeconds(0.4f);
         Instantiate(laser, transform.position, transform.rotation);
         

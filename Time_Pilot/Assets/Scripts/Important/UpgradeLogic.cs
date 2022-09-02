@@ -8,24 +8,23 @@ public class UpgradeLogic : MonoBehaviour
     [SerializeField] Button[] upgradeBtns;
     [SerializeField] Player player;
     [SerializeField] GameManager gameManager;
-    [SerializeField] Sprite[] imgs;
+    [SerializeField] List<Sprite> imgs;
     [SerializeField] GameObject canvas;
-    string[,] upgradeTexts = new string[,]
-    {
-        { "골든 기어", "타임머신 체력 +1" },
-        { "평범한 초시계", "이동속도 10 상승" },
-        { "전기태엽", "공격속도 10 상승" },
-        { "후방 발사기", "총알이 뒤로도 발사됩니다\n공격 속도가 15 감소" },
-        { "좌우 발사기", "총알이 좌우로도 발사됩니다\n공격 속도가 15 감소" },
-        { "보조 발사기", "보조 총알이 발사됩니다\n공격 속도가 30 감소" },
-        { "머신건", "공격 속도가 30 늘어나는 대신 \n이동 속도가 25% 감소합니다." },
-        { "기어 저금통", "다음 2번째 체크포인트에서 \n타임머신 체력 +1" },
-        { "기어 저금통 +", "다음 3번째 체크포인트에서 \n타임머신 체력 +2" },
-        { "슬로우 모드", "시간제한 스테이지에서\n제한시간 +0.5초" },
-    };
+    List<string[]> upgradeTexts = new List<string[]>();
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        upgradeTexts.Add(new string[] { "골든 기어", "타임머신 체력 +1", "0" });
+        upgradeTexts.Add(new string[] { "평범한 초시계", "이동속도 10 상승", "1" });
+        upgradeTexts.Add(new string[] { "전기태엽", "공격속도 10 상승", "2" });
+        upgradeTexts.Add(new string[] { "후방 발사기", "총알이 뒤로도 발사됩니다\n공격 속도가 15 감소", "3" });
+        upgradeTexts.Add(new string[] { "좌우 발사기", "총알이 좌우로도 발사됩니다\n공격 속도가 15 감소", "4" });
+        upgradeTexts.Add(new string[] { "보조 발사기", "보조 총알이 발사됩니다\n공격 속도가 30 감소", "5" });
+        upgradeTexts.Add(new string[] { "머신건", "공격 속도가 30 늘어나는 대신 \n이동 속도가 25% 감소합니다.", "6" });
+        upgradeTexts.Add(new string[] { "기어 저금통", "다음 1번째 체크포인트에서 \n타임머신 체력 +1", "7" });
+        upgradeTexts.Add(new string[] { "기어 저금통 +", "다음 3번째 체크포인트에서 \n타임머신 체력 +2", "8" });
+        upgradeTexts.Add(new string[] { "슬로우 모드", "시간제한 스테이지에서\n제한시간 +0.5초", "9" });
         //ResetChoice();
     }
 
@@ -36,8 +35,8 @@ public class UpgradeLogic : MonoBehaviour
     }
     public void ResetChoice()
     {
-        int l = upgradeTexts.GetLength(0);
-
+        int l = upgradeTexts.Count;
+        //Debug.Log(upgradeTexts[0][0]);
         for (int i = 0; i < 3; i++)
         {
             int rand = Random.Range(0, l);
@@ -45,12 +44,12 @@ public class UpgradeLogic : MonoBehaviour
             Image img = upgradeBtns[i].transform.GetChild(0).GetComponent<Image>();
             img.sprite = imgs[rand];
             Text title = upgradeBtns[i].transform.GetChild(1).GetComponent<Text>();
-            title.text = upgradeTexts[rand, 0];
+            title.text = upgradeTexts[rand][0];
             Text info = upgradeBtns[i].transform.GetChild(2).GetComponent<Text>();
-            info.text = upgradeTexts[rand, 1];
+            info.text = upgradeTexts[rand][1];
 
             upgradeBtns[i].onClick.RemoveAllListeners();
-            switch (rand)
+            switch (int.Parse(upgradeTexts[rand][2]))
             {
                 case 0: upgradeBtns[i].onClick.AddListener(GoldenGear); break;
                 case 1: upgradeBtns[i].onClick.AddListener(StopWatch); break;
@@ -94,6 +93,8 @@ public class UpgradeLogic : MonoBehaviour
         player.shooterImgs[0].SetActive(true);
         player.attackSpeed += 0.15f;
         Debug.Log("공격속도 " + player.attackSpeed);
+        upgradeTexts.Remove(upgradeTexts[3]);
+        imgs.Remove(imgs[3]);
         Chosen();
     }
     void LRShooter()
@@ -103,14 +104,18 @@ public class UpgradeLogic : MonoBehaviour
         player.shooterImgs[2].SetActive(true);
         player.attackSpeed += 0.15f;
         Debug.Log("공격속도 " + player.attackSpeed);
+        upgradeTexts.Remove(upgradeTexts[4]);
+        imgs.Remove(imgs[4]);
         Chosen();
     }
     void SubShooter()
     {
         player.shooters[2] = true;
-        player.shooterImgs[3].SetActive(true);
+        player.shooterImgs[3].SetActive(true); 
         player.attackSpeed += 0.3f;
         Debug.Log("공격속도 " + player.attackSpeed);
+        upgradeTexts.Remove(upgradeTexts[5]);
+        imgs.Remove(imgs[5]);
         Chosen();
     }
     void MachineGun()
@@ -122,7 +127,7 @@ public class UpgradeLogic : MonoBehaviour
     void PiggyBank()
     {
         PiggyBank p = new PiggyBank();
-        p.Init(2);
+        p.Init(1);
         gameManager.piggyBanks.Add(p);
         Chosen();
     }

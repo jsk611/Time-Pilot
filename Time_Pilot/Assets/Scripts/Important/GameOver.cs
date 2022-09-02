@@ -7,28 +7,33 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] GameObject  updateT, btn1, btn2;
-    [SerializeField] Text score1, score2, grade1,  grade2;
+    [SerializeField] Text score, grade1,  grade2;
     [SerializeField] Image background;
     [SerializeField] Sprite[] backgroundImgs;
+    [SerializeField] AudioClip[] audioClips;
+    AudioSource audioSource;
 
-    string msg1 = "도착한 연도 :";
     string msg2 = "등급 :";
     private void Start()
     {
         int i=0;
         int t = PlayerPrefs.GetInt("score");
-        if (t >= 1900) i = 0;
-        else if (t >= 1700) i = 1;
-        else if (t >= 600) i = 2;
-        else if (t >= -800) i = 3;
-        else if (t >= -3000) i = 4;
+        if (t > 1900) i = 0;
+        else if (t > 1700) i = 1;
+        else if (t > 800) i = 2;
+        else if (t > -800) i = 3;
+        else if (t > -3000) i = 4;
         else i = 5;
 
-        background.sprite = backgroundImgs[i];
+        background.sprite = backgroundImgs[0];
 
         StartCoroutine(GameOverRoutine());
 
         Time.timeScale = 1f;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = audioClips[i];
+        audioSource.Play();
     }
     public void Restart()
     {
@@ -40,23 +45,36 @@ public class GameOver : MonoBehaviour
     }
     IEnumerator GameOverRoutine()
     {
+        yield return new WaitForSecondsRealtime(2f);
+
+        score.text = "2022 A.D";
+        StartCoroutine(GameOverRoutine2());
         yield return new WaitForSecondsRealtime(1f);
 
-        foreach(var i in msg1)
+
+        int s = PlayerPrefs.GetInt("score");
+        int t = 2022;
+        while(t != s)
         {
-            score1.text += i;
-            yield return new WaitForSeconds(0.1f);
+            string msg = Mathf.Abs(t).ToString() + (t >= 0 ? " A.D" : " B.C");
+            score.text = msg;
+            t--;
+
+            if (t == 1900) StartCoroutine(BackgroundChange(1));
+            else if (t == 1700) StartCoroutine(BackgroundChange(2));
+            else if (t == 800) StartCoroutine(BackgroundChange(3));
+            else if (t == -800) StartCoroutine(BackgroundChange(4));
+            else if (t == -3000) StartCoroutine(BackgroundChange(5));
+
+            if(t > 1600)
+                yield return new WaitForSecondsRealtime(0.02f);
+            else if(t > 1000)
+                yield return new WaitForSecondsRealtime(0.01f);
+            else
+                yield return new WaitForSecondsRealtime(0.005f);
         }
-
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        int t = PlayerPrefs.GetInt("score");
-        string msg = Mathf.Abs(t).ToString() + (t >= 0 ? " A.D" : " B.C");
-        foreach (var i in msg)
-        {
-            score2.text += i;
-            yield return new WaitForSeconds(0.1f);
-        }       
+        score.text = Mathf.Abs(s).ToString() + (s >= 0 ? " A.D" : " B.C");
+        
         if (PlayerPrefs.GetInt("isUpdated") == 1)
             updateT.SetActive(true);
 
@@ -81,5 +99,34 @@ public class GameOver : MonoBehaviour
         btn1.SetActive(true);
         btn2.SetActive(true);
 
+    }
+    IEnumerator GameOverRoutine2()
+    {
+        float size = 400;
+        while(size > 100)
+        {
+            size -= Time.deltaTime * 300;
+            score.fontSize = (int)size;
+            yield return new WaitForEndOfFrame();
+        }
+        score.fontSize = 100;
+    }
+
+    IEnumerator BackgroundChange(int imgIdx)
+    {
+        float a = 0.5f;
+        do
+        {
+            a -= Time.deltaTime / 2f;
+            background.color = new Color(background.color.r, background.color.g, background.color.b, a);
+            yield return new WaitForEndOfFrame();
+        } while (background.color.a > 0);
+        background.sprite = backgroundImgs[imgIdx];
+        do
+        {
+            a += Time.deltaTime / 2f;
+            background.color = new Color(background.color.r, background.color.g, background.color.b, a);
+            yield return new WaitForEndOfFrame();
+        } while (background.color.a < 0.5f);
     }
 }

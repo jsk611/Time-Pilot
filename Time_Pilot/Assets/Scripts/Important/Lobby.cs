@@ -38,9 +38,9 @@ public class Lobby : MonoBehaviour
         else idx = 13;
         StartCoroutine(BackgroundChange());
 
-        master.value = PlayerPrefs.GetFloat("master", 0.6f);
-        bgm.value = PlayerPrefs.GetFloat("bgm", 0.6f);
-        effect.value = PlayerPrefs.GetFloat("effect", 0.6f);
+        master.value = PlayerPrefs.GetFloat("master", 1f);
+        bgm.value = PlayerPrefs.GetFloat("bgm", 1f);
+        effect.value = PlayerPrefs.GetFloat("effect", 1f);
     }
     public void GameStart()
     {
@@ -74,21 +74,21 @@ public class Lobby : MonoBehaviour
     }
     public void MasterCtl()
     {
-        float sound = master.value * 60 - 40;
+        float sound = master.value * 40 - 40;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
         else audioMixer.SetFloat("master", sound);
         PlayerPrefs.SetFloat("master",master.value);
     }
     public void BGMCtl()
     {
-        float sound = bgm.value * 60 - 40;
+        float sound = bgm.value * 40 - 40;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
         else audioMixer.SetFloat("bgm", sound);
         PlayerPrefs.SetFloat("bgm", bgm.value);
     }
     public void EffectCtl()
     {
-        float sound = bgm.value * 60 - 40;
+        float sound = bgm.value * 40 - 40;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
         else audioMixer.SetFloat("effect", sound);
         PlayerPrefs.SetFloat("effect", effect.value);

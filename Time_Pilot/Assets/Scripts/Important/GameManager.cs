@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         level = 0;
         hp = 4;
         NextStage();
-        sound.Play(bgmClip, Define.Sound.Bgm, 1, 0.3f);
+        sound.Play(bgmClip, Define.Sound.Bgm, 1, 0.6f);
     }
 
     private void Update()
@@ -76,14 +76,22 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             return;
         }
-        Time.timeScale = score <= 0 ? 1.75f : 1f + 0.75f * ((2022-score) / 2022); //시간 가속
+        Time.timeScale = score <= 0 ? 2f : 1f + 1f * ((2022-score) / 2022); //시간 가속
         sound.ChangePitch(Time.timeScale);
         if ((int)score == checkPoint)
             isCheckpoint = true;
     }
     private void LateUpdate()
     {
-        score -= Time.deltaTime*4;
+        score -= Time.deltaTime * 4;
+        if(score < 1700)
+            score -= Time.deltaTime * 2;
+        if(score < 1000)
+            score -= Time.deltaTime * 2;
+        if (score < 0)
+            score -= Time.deltaTime * 2;
+        if (score < -1500)
+            score -= Time.deltaTime * 4;
         scoreText.text = ((int)score).ToString();
         
     }
@@ -93,12 +101,12 @@ public class GameManager : MonoBehaviour
         player.layer = 6;
         if(success)
         {
-            sound.Play(clips[0], Define.Sound.Effect, 1, 0.5f);
+            sound.Play(clips[0], Define.Sound.Effect, 1);
             O.SetActive(true);
         }
         else
         {
-            sound.Play(clips[1], Define.Sound.Effect, 1, 0.5f);
+            sound.Play(clips[1], Define.Sound.Effect, 1);
             X.SetActive(true);
         }
         yield return new WaitForSeconds(0.75f);
@@ -109,7 +117,7 @@ public class GameManager : MonoBehaviour
             Upgrade();
             isCheckpoint = false;
         }
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
         countdown.SetActive(true);
         Text count = countdown.GetComponentInChildren<Text>();
         for(int i=3; i>0; i--)
@@ -160,6 +168,8 @@ public class GameManager : MonoBehaviour
 
     void Upgrade()
     {
+        if (hp <= 0)
+            return;
         upgradeUI.SetActive(true);
         upgradeUI.GetComponentInChildren<UpgradeLogic>().ResetChoice();
         foreach (PiggyBank p in piggyBanks)
@@ -195,16 +205,17 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+
         PlayerPrefs.SetInt("score", (int)score);
 
-        string[] grade = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-            "13", "14", "15", "16", "17", "18","19","20","21","22","23","24","25" };
+        string[] grade = new string[] { "GOD!!!", "S++", "S+", "S", "A++", "A+", "A", "A-", "A--", "B+", "B", "B-",
+            "C+", "C", "C-", "D+", "D", "D-","E+","E","E-","F+","F","F-","NOOB" };
         int i = 0;
         while(i<25)
         {
             if(score >= (19-i)*100)
             {
-                PlayerPrefs.SetString("grade", grade[i]);
+                PlayerPrefs.SetString("grade", grade[grade.Length-1-i]);
                 break;
             }
             i++;

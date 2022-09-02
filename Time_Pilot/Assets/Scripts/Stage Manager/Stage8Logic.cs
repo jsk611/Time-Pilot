@@ -102,10 +102,10 @@ public class Stage8Logic : Stage
     IEnumerator Meteo()
     {
         yield return new WaitForSeconds(1f);
-        while(true)
+        while(time>1)
         {
             Instantiate(meteo, new Vector2(Random.Range(-6f, 6f), 7f), Quaternion.AngleAxis(Random.Range(-50f, 50f), Vector3.forward));
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }

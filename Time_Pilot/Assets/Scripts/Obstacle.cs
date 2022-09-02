@@ -8,7 +8,7 @@ public class Obstacle : Enemy
     [SerializeField] float speed;
     void Start()
     {
-        SetHp(Random.Range(1, 7));
+        SetHp(Random.Range(1, 3));
         speed = 8f/hp;
     }
 

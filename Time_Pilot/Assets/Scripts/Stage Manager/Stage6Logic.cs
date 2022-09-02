@@ -24,7 +24,7 @@ public class Stage6Logic : Stage
     }
     IEnumerator SpawnArrow()
     {
-        while(true)
+        while(time>1f)
         {
             int randNum = Random.Range(0, 2);
             float randX = randNum == 0 ? -9 : 9;
@@ -38,7 +38,7 @@ public class Stage6Logic : Stage
     IEnumerator SpawnBomb()
     {
         yield return new WaitForSeconds(0.5f);
-        while (true)
+        while (time>1f)
         {
             int randNum = Random.Range(0, 2);
             float randX = randNum == 0 ? -9 : 9;
