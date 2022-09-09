@@ -22,6 +22,8 @@ public class Lobby : MonoBehaviour
 
     bool isFullScreen;
     [SerializeField] Button fullScreenBtn;
+
+    [SerializeField] Texture2D cursor;
     private void Start()
     {
         Screen.SetResolution(1920, 1080, true);
@@ -29,18 +31,21 @@ public class Lobby : MonoBehaviour
         high.text = "HIGH : " + PlayerPrefs.GetInt("maxScore", 2022).ToString();
         grade.text = "등급 : " + PlayerPrefs.GetString("maxGrade", "데이터 없음");
 
-        int t = PlayerPrefs.GetInt("highScore",2022);
+        int t = PlayerPrefs.GetInt("maxScore",2022);
         if (t >= 1900) idx = 8;
         else if (t >= 1700) idx = 9;
         else if (t >= 600) idx = 10;
         else if (t >= -800) idx = 11;
         else if (t >= -3000) idx = 12;
         else idx = 13;
+        Debug.Log(idx);
         StartCoroutine(BackgroundChange());
 
         master.value = PlayerPrefs.GetFloat("master", 1f);
         bgm.value = PlayerPrefs.GetFloat("bgm", 1f);
         effect.value = PlayerPrefs.GetFloat("effect", 1f);
+
+        Cursor.SetCursor(cursor, new Vector2(cursor.width/2, cursor.height/2), CursorMode.ForceSoftware);
     }
     public void GameStart()
     {
@@ -74,22 +79,22 @@ public class Lobby : MonoBehaviour
     }
     public void MasterCtl()
     {
-        float sound = master.value * 40 - 40;
-        if (sound == -20) audioMixer.SetFloat("bgm", -80f);
+        float sound = master.value * 20 - 20;
+        if (sound == -20) audioMixer.SetFloat("master", -80f);
         else audioMixer.SetFloat("master", sound);
         PlayerPrefs.SetFloat("master",master.value);
     }
     public void BGMCtl()
     {
-        float sound = bgm.value * 40 - 40;
+        float sound = bgm.value * 20 - 20;
         if (sound == -20) audioMixer.SetFloat("bgm", -80f);
         else audioMixer.SetFloat("bgm", sound);
         PlayerPrefs.SetFloat("bgm", bgm.value);
     }
     public void EffectCtl()
     {
-        float sound = bgm.value * 40 - 40;
-        if (sound == -20) audioMixer.SetFloat("bgm", -80f);
+        float sound = bgm.value * 20 - 20;
+        if (sound == -20) audioMixer.SetFloat("effect", -80f);
         else audioMixer.SetFloat("effect", sound);
         PlayerPrefs.SetFloat("effect", effect.value);
     }

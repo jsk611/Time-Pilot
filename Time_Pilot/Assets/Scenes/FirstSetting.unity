@@ -3271,6 +3271,8 @@ MonoBehaviour:
   countdown: {fileID: 577776990}
   upgradeUI: {fileID: 340477445}
   success: 0
+  checkPoint: 0
+  level: 0
   bgm: {fileID: -3736544157499856867, guid: a4f3af2ebb43d064297c0e08195840fc, type: 2}
   effect: {fileID: 3317856260107711276, guid: a4f3af2ebb43d064297c0e08195840fc, type: 2}
   clips:
@@ -3629,6 +3631,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 681dae9625845f447b9b36bc40bf9ec0, type: 3}
   - {fileID: 21300000, guid: acf0c18927e2b23458213babdb646e1f, type: 3}
   - {fileID: 21300000, guid: 7f291acb33fc90a428ba4fddb7a64672, type: 3}
+  - {fileID: 21300000, guid: f9ee0227df1c65045a469153b7d41493, type: 3}
+  - {fileID: 21300000, guid: 8c832e16a0fb81e4eaf9d43ef6c10e47, type: 3}
   canvas: {fileID: 340477445}
 --- !u!1 &1977075764
 GameObject:

@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject upgradeUI;
     public bool success;
 
-    int checkPoint;
-    int level;
+    public int checkPoint;
+    public int level;
 
     bool isCheckpoint;
 
@@ -78,8 +78,19 @@ public class GameManager : MonoBehaviour
         }
         Time.timeScale = score <= 0 ? 2f : 1f + 1f * ((2022-score) / 2022); //시간 가속
         sound.ChangePitch(Time.timeScale);
-        if ((int)score == checkPoint)
+        if ((int)score <= checkPoint)
             isCheckpoint = true;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Lobby");
+            Destroy(baseUI);
+            Destroy(player);
+            Destroy(timeOutUI);
+            Destroy(upgradeUI);
+            Destroy(gameObject);
+            Destroy(GameObject.Find("@Sound"));
+        }
     }
     private void LateUpdate()
     {
@@ -159,6 +170,8 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseHp()
     {
+        if (hp >= 4)
+            return;
         hp++;
         for (int i = 0; i < hp; i++)
         {
@@ -168,10 +181,12 @@ public class GameManager : MonoBehaviour
 
     void Upgrade()
     {
+        checkPoint -= 100 + 20 * level++;
         if (hp <= 0)
             return;
         upgradeUI.SetActive(true);
         upgradeUI.GetComponentInChildren<UpgradeLogic>().ResetChoice();
+
         foreach (PiggyBank p in piggyBanks)
         {
             p.ReachCheckpoint();
@@ -180,13 +195,23 @@ public class GameManager : MonoBehaviour
                 if (p.startPoint == 3)
                 {
                     IncreaseHp();
-                    piggyBanks.Remove(p);
                 }
                 IncreaseHp();
             }
         }
+        for(int i=0;i<2;i++)
+        {
+            foreach(PiggyBank p in piggyBanks)
+            {
+                if(p.isEarned)
+                {
+                    piggyBanks.Remove(p);
+                    break;
+                }
+            }
+        }
+
         
-        checkPoint -= 100 + 20 * level++;
     }
     public void NextStage()
     {
@@ -221,7 +246,7 @@ public class GameManager : MonoBehaviour
             i++;
         }
         if(i >= 25)
-            PlayerPrefs.SetString("grade", grade[24]);
+            PlayerPrefs.SetString("grade", grade[0]);
 
 
         if (score < PlayerPrefs.GetInt("maxScore", 9999))

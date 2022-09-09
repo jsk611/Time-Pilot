@@ -25,6 +25,8 @@ public class UpgradeLogic : MonoBehaviour
         upgradeTexts.Add(new string[] { "기어 저금통", "다음 1번째 체크포인트에서 \n타임머신 체력 +1", "7" });
         upgradeTexts.Add(new string[] { "기어 저금통 +", "다음 3번째 체크포인트에서 \n타임머신 체력 +2", "8" });
         upgradeTexts.Add(new string[] { "슬로우 모드", "시간제한 스테이지에서\n제한시간 +0.5초", "9" });
+        upgradeTexts.Add(new string[] { "웜홀 생성기", "다음 체크포인트 \n직전으로 이동.\n대신 다음 체크포인트를 \n이용할 수 없습니다.", "10" });
+        upgradeTexts.Add(new string[] { "밸런스 업그레이드", "공격속도 +5\n이동속도 +5", "11" });
         //ResetChoice();
     }
 
@@ -61,6 +63,8 @@ public class UpgradeLogic : MonoBehaviour
                 case 7: upgradeBtns[i].onClick.AddListener(PiggyBank); break;
                 case 8: upgradeBtns[i].onClick.AddListener(PiggyBankPlus); break;
                 case 9: upgradeBtns[i].onClick.AddListener(SlowMode); break;
+                case 10: upgradeBtns[i].onClick.AddListener(Wormhole); break;
+                case 11: upgradeBtns[i].onClick.AddListener(BalanceUp); break;
             }
         }
     }
@@ -121,7 +125,8 @@ public class UpgradeLogic : MonoBehaviour
     void MachineGun()
     {
         player.speed *= 0.75f;
-        player.attackSpeed -= 0.3f;
+        if (player.attackSpeed > 0.1f)
+            player.attackSpeed -= 0.3f;
         Chosen();
     }
     void PiggyBank()
@@ -141,6 +146,20 @@ public class UpgradeLogic : MonoBehaviour
     void SlowMode()
     {
         gameManager.handicap += 0.5f;
+        Chosen();
+    }
+    void Wormhole()
+    {
+        gameManager.score = gameManager.checkPoint + 10;
+        gameManager.checkPoint -= 100 + 20 * ++gameManager.level;
+        Chosen();
+    }
+    void BalanceUp()
+    {
+        if (player.attackSpeed > 0.1f)
+            player.attackSpeed -= 0.05f;
+
+        player.speed += 0.25f;
         Chosen();
     }
 }
