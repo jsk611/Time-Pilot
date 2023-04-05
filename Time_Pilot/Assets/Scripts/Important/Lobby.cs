@@ -59,6 +59,10 @@ public class Lobby : MonoBehaviour
     {
         option.SetActive(!option.activeSelf);
     }
+    public void Tutorial()
+    {
+        StartCoroutine(Countdown2());
+    }
     public void FullScreen()
     {
         if(isFullScreen)
@@ -137,6 +141,25 @@ public class Lobby : MonoBehaviour
         }
         countdown.SetActive(false);
         SceneManager.LoadScene("FirstSetting");
+    }
+    IEnumerator Countdown2()
+    {
+        Destroy(b1);
+        Destroy(b2);
+        Destroy(b3);
+        countdown.SetActive(true);
+        Text count = countdown.GetComponentInChildren<Text>();
+        for (int i = 3; i > 0; i--)
+        {
+            //countdown
+            count.text = i.ToString();
+
+            if (i == 1)
+                StartCoroutine(FadeIn(fade, 0.75f));
+            yield return new WaitForSeconds(0.75f);
+        }
+        countdown.SetActive(false);
+        SceneManager.LoadScene("Tutorial");
     }
     public IEnumerator FadeIn(Image image, float time)
     {

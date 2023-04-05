@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject subBullet;
     bool reloading;
@@ -72,7 +71,6 @@ public class Player : MonoBehaviour
                 Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z + 15));
                 Instantiate(subBullet, transform.position, Quaternion.Euler(0, 0, transform.eulerAngles.z -15));
             }
-            //gameManager.sound.Play(clip, Define.Sound.Effect, 1.8f, 0.1f);
             Debug.Log("น฿ป็");
             reloading = true;
             yield return new WaitForSeconds(attackSpeed);
