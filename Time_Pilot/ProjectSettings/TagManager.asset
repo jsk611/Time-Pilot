@@ -10,6 +10,7 @@ TagManager:
   - DamagedPlayer
   - target
   - StageManager
+  - TutorialTarget
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     protected int maxHp;
     protected SpriteRenderer spr;
     bool isHit;
+    bool isTutorial;
     float t;
     [SerializeField] protected Image hpBar;
     [SerializeField] protected ParticleSystem damagedEvent;
@@ -23,6 +24,9 @@ public class Enemy : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         if (spr == null)
             spr = GetComponentInChildren<SpriteRenderer>();
+
+        if (gameManager == null)
+            isTutorial = true;
     }
     public void DecreaseHp()
     {
@@ -38,7 +42,7 @@ public class Enemy : MonoBehaviour
             if (destroyEvent != null)
                 Instantiate(destroyEvent, transform.position, Quaternion.identity);
 
-            gameManager.sound.Play(deathClip, Define.Sound.Effect);
+            if(!isTutorial) gameManager.sound.Play(deathClip, Define.Sound.Effect);
             Destroy(gameObject);
         }
     }
