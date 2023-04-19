@@ -14,7 +14,7 @@ public class Stage9Logic : Stage
     void Start()
     {
         LoadInfo();
-        SetTime(15f);
+        SetTime(2f);
         StartCoroutine(Stop());
     }
 
@@ -48,7 +48,7 @@ public class Stage9Logic : Stage
         foreach(var i in stopT)
         {
             i.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.15f);
         }
         foreach(var i in stopT)
         {
@@ -58,7 +58,7 @@ public class Stage9Logic : Stage
         vec = player.transform.position;
         isStopping = true;
         img.SetActive(true);
-        StartCoroutine(SummonObstacle());
+        //StartCoroutine(SummonObstacle());
 
         float a = 1f;
         while(stopT[0].color.a > 0.2f)

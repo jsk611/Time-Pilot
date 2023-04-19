@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor.XR;
-using UnityEditor.U2D.Path;
+
 
 public class TutorialLogic : MonoBehaviour
 {
@@ -51,14 +50,15 @@ public class TutorialLogic : MonoBehaviour
 
     string[] hitMoment =
     {
-        "아 맞으셨군요..",
+        "한대도 맞지 않고 해보세요!",
         "다시 한번 해봅시다!",
         "[ 제한시간 동안 생존하십시오! ]"
     };
 
     int mode = 0;
     bool modeChangeTrigger = false;
-
+    bool skipTalking;
+    [SerializeField] GameObject skipText;
     [Header("Mode 1")]
     public int mode1Num;
     [SerializeField] GameObject tutorialTarget;
@@ -85,6 +85,16 @@ public class TutorialLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Lobby");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        {
+            skipTalking = true;
+        }
+
         if (modeChangeTrigger)
         {
             StartCoroutine("Mode" + mode.ToString());
@@ -120,42 +130,98 @@ public class TutorialLogic : MonoBehaviour
     {
         foreach (var item in contents)
         {
+            skipTalking = false;
             introduceText.text = "";
             foreach (var t in item)
             {
                 introduceText.text += t;
+                if (skipTalking)
+                {
+                    introduceText.text = item;
+                    skipTalking = false;
+                    break;
+                }
                 yield return new WaitForSeconds(0.05f);
             }
-            yield return new WaitForSeconds(1f);
+
+            if (item == contents[contents.Length - 1]) continue;
+
+            yield return new WaitForSeconds(0.25f);
+
+            while (!skipTalking)
+            {
+                skipText.SetActive(true);
+                yield return new WaitForEndOfFrame();
+            }
+            skipTalking = false;
+            skipText.SetActive(false);
         }
         mode++;
         modeChangeTrigger = true;
     }
     IEnumerator HitMoment()
     {
+        skipTalking = false;
+        mode = 4;
         foreach (var item in hitMoment)
         {
             introduceText.text = "";
             foreach (var t in item)
             {
                 introduceText.text += t;
+                if (skipTalking)
+                {
+                    introduceText.text = item;
+                    skipTalking = false;
+                    break;
+                }
                 yield return new WaitForSeconds(0.05f);
             }
-            yield return new WaitForSeconds(1f);
+
+            if (item == hitMoment[hitMoment.Length - 1]) continue;
+
+            yield return new WaitForSeconds(0.25f);
+
+            while (!skipTalking)
+            {
+                skipText.SetActive(true);
+                yield return new WaitForEndOfFrame();
+            }
+            skipTalking = false;
+            skipText.SetActive(false);
         }
+        mode = 3;
         modeChangeTrigger = true;
     }
     IEnumerator Finish()
     {
+        skipTalking = false;
         foreach (var item in finish)
         {
             introduceText.text = "";
             foreach (var t in item)
             {
                 introduceText.text += t;
+                if (skipTalking)
+                {
+                    introduceText.text = item;
+                    skipTalking = false;
+                    break;
+                }
                 yield return new WaitForSeconds(0.05f);
             }
-            yield return new WaitForSeconds(1f);
+
+            if (item == finish[finish.Length - 1]) continue;
+
+            yield return new WaitForSeconds(0.25f);
+
+            while (!skipTalking)
+            {
+                skipText.SetActive(true);
+                yield return new WaitForEndOfFrame();
+            }
+            skipTalking = false;
+            skipText.SetActive(false);
         }
         SceneManager.LoadScene("Lobby");
     }

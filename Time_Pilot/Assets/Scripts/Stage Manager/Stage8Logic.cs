@@ -7,7 +7,7 @@ public class Stage8Logic : Stage
     [SerializeField] GameObject cam;
     [SerializeField] GameObject meteo;
     [SerializeField] Animator wall;
-    [SerializeField] Rigidbody2D rock;
+    [SerializeField] GameObject rock;
     [SerializeField] float rockSpeed;
     [SerializeField] SpriteRenderer background;
     [SerializeField] Sprite img;
@@ -56,8 +56,9 @@ public class Stage8Logic : Stage
     }
     void AddForceToRock()
     {
-        rock.AddForce(Vector2.right * 200 * player.GetComponent<Player>().speed * Time.deltaTime, ForceMode2D.Impulse);
-        rock.velocity = Vector2.right * rockSpeed/5f * player.GetComponent<Player>().speed;
+        //rock.AddForce(Vector2.right * 200 * player.GetComponent<Player>().speed * Time.deltaTime, ForceMode2D.Impulse);
+        //rock.velocity = Vector2.right * rockSpeed/5f * player.GetComponent<Player>().speed;
+        rock.GetComponent<Rock>().isStarted = true;
         cameraMoving = true;
     }
     IEnumerator RotateCam1()
