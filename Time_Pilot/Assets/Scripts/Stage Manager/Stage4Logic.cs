@@ -13,7 +13,8 @@ public class Stage4Logic : Stage
         StartCoroutine(SummonBalls());
         SetTime(10f);
 
-        StartCoroutine(RotateCam());
+        if(Time.timeScale > 1.5f)
+            StartCoroutine(RotateCam());
     }
 
     private void Update()

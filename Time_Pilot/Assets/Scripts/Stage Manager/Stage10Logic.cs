@@ -9,6 +9,7 @@ public class Stage10Logic : Stage
 
     [SerializeField] Transform[] points;
     [SerializeField] GameObject lightning;
+    [SerializeField] GameObject lightningEffect;
     [SerializeField] AudioClip clip1;
     void Start()
     {
@@ -62,6 +63,8 @@ public class Stage10Logic : Stage
             }
             yield return new WaitForSeconds(1f);
             gameManager.sound.Play(clip1, Define.Sound.Effect);
+            lightningEffect.SetActive(false);
+            lightningEffect.SetActive(true);
             yield return new WaitForSeconds(4f);
         }
     }

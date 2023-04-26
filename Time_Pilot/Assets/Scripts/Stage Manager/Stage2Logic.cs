@@ -39,7 +39,10 @@ public class Stage2Logic : Stage
             Vector2 randPos = new Vector2(Random.Range(-8, 8), Random.Range(-4, 4));
             GameObject l = Instantiate(laserShooter, randPos, Quaternion.identity);
             l.GetComponent<LaserShooter>().player = player.transform;
-            yield return new WaitForSeconds(0.3f);
+            if(Time.timeScale < 1.8f)
+                yield return new WaitForSeconds(0.6f);
+            else
+                yield return new WaitForSeconds(0.3f);
         }
         
     }

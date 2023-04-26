@@ -94,13 +94,15 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        score -= Time.deltaTime * 4;
-        if(score < 1700)
+        score -= Time.deltaTime * 2;
+        if (score < 1900)
+            score -= Time.deltaTime * 2;
+        if (score < 1600)
             score -= Time.deltaTime * 2;
         if(score < 1000)
             score -= Time.deltaTime * 2;
         if (score < 0)
-            score -= Time.deltaTime * 2;
+            score -= Time.deltaTime * 3;
         if (score < -1500)
             score -= Time.deltaTime * 4;
         scoreText.text = ((int)score).ToString();
