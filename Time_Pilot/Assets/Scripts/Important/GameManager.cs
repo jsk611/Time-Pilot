@@ -76,8 +76,11 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             return;
         }
+
         Time.timeScale = score <= 0 ? 2f : 1f + 1f * ((2022-score) / 2022); //시간 가속
+
         sound.ChangePitch(Time.timeScale);
+
         if ((int)score <= checkPoint)
             isCheckpoint = true;
 

@@ -9,7 +9,7 @@ public class MovingWall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = Random.Range(1f, 8f);
+        speed = 2.5f;
         dir = Vector2.up;
     }
 

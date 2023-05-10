@@ -40,9 +40,9 @@ public class Stage7Logic : Stage
 
         r = Random.Range(0, 2);
         int randAnswer = 0;
-        if(Time.timeScale < 1.75f) randAnswer = Random.Range(0, 14);
-        else randAnswer = Random.Range(0, questions.Length - 1);
-
+        if(Time.timeScale < 1.6f) randAnswer = Random.Range(0, 14);
+        else randAnswer = Random.Range(8, questions.GetLength(0));
+       
         qText.text = questions[randAnswer, 0];
         
         answers[r].isAnswer = true;

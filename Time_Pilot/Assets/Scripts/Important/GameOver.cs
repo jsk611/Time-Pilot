@@ -65,13 +65,14 @@ public class GameOver : MonoBehaviour
             else if (t == 800) StartCoroutine(BackgroundChange(3));
             else if (t == -800) StartCoroutine(BackgroundChange(4));
             else if (t == -3000) StartCoroutine(BackgroundChange(5));
-
+            
             if(t > 1600)
                 yield return new WaitForSecondsRealtime(0.01f);
-            else if(t > 1000)
-                yield return new WaitForSecondsRealtime(0.005f);
-            else
-                yield return new WaitForSecondsRealtime(0.002f);
+            if (t < 1000)
+                t--;
+            if (t < 0)
+                t--;
+            yield return new WaitForSecondsRealtime(0.01f);
         }
         score.text = Mathf.Abs(s).ToString() + (s >= 0 ? " A.D" : " B.C");
         

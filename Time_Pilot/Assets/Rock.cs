@@ -12,7 +12,7 @@ public class Rock : MonoBehaviour
     {
         if(isStarted)
         {
-            transform.Translate(Vector3.right * 4.5f * Time.timeScale * Time.deltaTime);
+            transform.Translate(Vector3.right * 5f * Time.deltaTime);
         }
     }
 }

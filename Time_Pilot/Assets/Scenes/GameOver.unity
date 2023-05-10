@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 04592a05d48754e4b868291bc352c3f3, type: 3}
   - {fileID: 8300000, guid: 0a349d69d5ea9594b9412d83d85286ca, type: 3}
   - {fileID: 8300000, guid: f24c66daafc02eb488f8387bce28affc, type: 3}
-  - {fileID: 8300000, guid: 88341d17d94659f4e9365a71ac5d709b, type: 3}
+  - {fileID: 8300000, guid: 4cd7e06ccd19f08429c314fd580022c6, type: 3}
 --- !u!4 &62156025
 Transform:
   m_ObjectHideFlags: 0
@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
