@@ -14,6 +14,8 @@ public class GameOver : MonoBehaviour
     AudioSource audioSource;
 
     string msg2 = "µî±Þ :";
+
+    int level;
     private void Start()
     {
         int i=0;
@@ -54,20 +56,22 @@ public class GameOver : MonoBehaviour
 
         int s = PlayerPrefs.GetInt("score");
         int t = 2022;
-        while(t != s)
+        while(t >= s)
         {
             string msg = Mathf.Abs(t).ToString() + (t >= 0 ? " A.D" : " B.C");
             score.text = msg;
             t--;
 
-            if (t == 1900) StartCoroutine(BackgroundChange(1));
-            else if (t == 1700) StartCoroutine(BackgroundChange(2));
-            else if (t == 800) StartCoroutine(BackgroundChange(3));
-            else if (t == -800) StartCoroutine(BackgroundChange(4));
-            else if (t == -3000) StartCoroutine(BackgroundChange(5));
+            if (t <= 1900 && level == 0) StartCoroutine(BackgroundChange(1));
+            else if (t <= 1700 && level == 1) StartCoroutine(BackgroundChange(2));
+            else if (t <= 800 && level == 2) StartCoroutine(BackgroundChange(3));
+            else if (t <= -800 && level == 3) StartCoroutine(BackgroundChange(4));
+            else if (t <= -3000 && level == 4) StartCoroutine(BackgroundChange(5));
             
-            if(t > 1600)
+            if(t > 1900)
                 yield return new WaitForSecondsRealtime(0.01f);
+            if (t < 1600)
+                t--;
             if (t < 1000)
                 t--;
             if (t < 0)
@@ -115,6 +119,7 @@ public class GameOver : MonoBehaviour
 
     IEnumerator BackgroundChange(int imgIdx)
     {
+        level = imgIdx;
         float a = 0.5f;
         do
         {

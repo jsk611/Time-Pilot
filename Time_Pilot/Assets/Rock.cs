@@ -10,9 +10,9 @@ public class Rock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isStarted)
-        {
-            transform.Translate(Vector3.right * 5f * Time.deltaTime);
-        }
+
+        transform.Translate(Vector3.right * 5f * Time.deltaTime);
+        if(Time.timeScale > 1.6f) transform.Translate(Vector3.right * 1f * Time.deltaTime);
+        if(Time.timeScale >= 2f) transform.Translate(Vector3.right * 0.75f * Time.deltaTime);
     }
 }
