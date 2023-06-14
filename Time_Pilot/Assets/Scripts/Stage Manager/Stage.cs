@@ -52,5 +52,13 @@ public class Stage : MonoBehaviour
             gameManager.success = false;
         }
     }
-    
+
+    public void PlayerHit(bool isBossStage)
+    {
+        if (playerScript.isHit)
+        {
+            playerScript.isHit = false;
+        }
+    }
+
 }

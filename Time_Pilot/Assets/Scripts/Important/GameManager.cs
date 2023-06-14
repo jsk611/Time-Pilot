@@ -53,6 +53,9 @@ public class GameManager : MonoBehaviour
     public List<PiggyBank> piggyBanks = new List<PiggyBank>();
 
     public float handicap = 0;
+
+    public bool isInBossStage;
+    public int bossStageNum;
     void Start()
     {
         sound.Init(bgm, effect);
@@ -97,6 +100,8 @@ public class GameManager : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if (isInBossStage) return;
+
         score -= Time.deltaTime * 2;
         if (score < 1900)
             score -= Time.deltaTime * 2;
@@ -110,6 +115,13 @@ public class GameManager : MonoBehaviour
             score -= Time.deltaTime * 4;
         scoreText.text = ((int)score).ToString();
         
+        if(score <= 1939 && bossStageNum == 0)
+        {
+            score = 1939.1f;
+            bossStageNum = 1;
+            
+            isInBossStage = true;
+        }
     }
     public IEnumerator TimeOut()
     {
@@ -157,6 +169,15 @@ public class GameManager : MonoBehaviour
     public void Failed()
     {
         success = false;
+
+        //보스전 타임오버 시 예외처리
+        if (SceneManager.GetActiveScene().name.Contains("Boss"))
+        {
+            DecreaseHp();
+            DecreaseHp();
+            DecreaseHp();
+            DecreaseHp();
+        }
         DecreaseHp();
     }
     void DecreaseHp()
@@ -220,6 +241,15 @@ public class GameManager : MonoBehaviour
     }
     public void NextStage()
     {
+        //보스 스테이지 이동
+        if (isInBossStage)
+        {
+            SceneManager.LoadScene("BossStage " + bossStageNum.ToString());
+            StartCoroutine(FadeIn(fade, 0.3f));
+            Succeed();
+            return;
+        }
+
         //랜덤 스테이지 이동
         int r;
         do

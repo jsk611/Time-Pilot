@@ -117,6 +117,18 @@ public class Player : MonoBehaviour
             StartCoroutine(FadeOut(spr, 0.5f));
             yield return new WaitForSeconds(0.5f);
         }
+
+        //보스전 무적시간 예외처리 
+        if (currentScene.Contains("Boss"))
+        {
+            for(int i=0; i<3; i++) 
+            {
+                StartCoroutine(FadeIn(spr, 0.5f));
+                yield return new WaitForSeconds(0.5f);
+                StartCoroutine(FadeOut(spr, 0.5f));
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
         gameObject.layer = 3;
     }
 
