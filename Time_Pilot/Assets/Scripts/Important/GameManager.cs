@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(baseUI);
         DontDestroyOnLoad(timeOutUI);
         DontDestroyOnLoad(upgradeUI);
-        score = 2022;
+        score = 1950;
         checkPoint = 1900;
         level = 0;
         hp = 4;
@@ -180,7 +180,7 @@ public class GameManager : MonoBehaviour
         }
         DecreaseHp();
     }
-    void DecreaseHp()
+    public void DecreaseHp()
     {
         //미션 실패 시 플레이어 체력 감소
         hp--;
@@ -246,7 +246,6 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("BossStage " + bossStageNum.ToString());
             StartCoroutine(FadeIn(fade, 0.3f));
-            Succeed();
             return;
         }
 

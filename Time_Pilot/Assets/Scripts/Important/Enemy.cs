@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     protected SpriteRenderer spr;
     bool isHit;
     bool isTutorial;
+    protected bool isBoss;
     float t;
     [SerializeField] protected Image hpBar;
     [SerializeField] protected ParticleSystem damagedEvent;
@@ -54,6 +55,10 @@ public class Enemy : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("bullet"))
+        {
+            DecreaseHp();
+        }
+        if (collision.CompareTag("enemy") && isBoss)
         {
             DecreaseHp();
         }

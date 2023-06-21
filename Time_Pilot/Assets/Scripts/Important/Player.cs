@@ -110,12 +110,16 @@ public class Player : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         gameObject.layer = 6;
         isHit=true;
-        while(currentScene == SceneManager.GetActiveScene().name && currentScene != "Tutorial")
+        if (!currentScene.Contains("Boss"))
         {
-            StartCoroutine(FadeIn(spr, 0.5f));
-            yield return new WaitForSeconds(0.5f);
-            StartCoroutine(FadeOut(spr, 0.5f));
-            yield return new WaitForSeconds(0.5f);
+            while(currentScene == SceneManager.GetActiveScene().name && currentScene != "Tutorial")
+            {
+                StartCoroutine(FadeIn(spr, 0.5f));
+                yield return new WaitForSeconds(0.5f);
+                StartCoroutine(FadeOut(spr, 0.5f));
+                yield return new WaitForSeconds(0.5f);
+            }
+
         }
 
         //보스전 무적시간 예외처리 

@@ -7,18 +7,29 @@ public class BossStage1Logic : Stage
 {
     [SerializeField] RectTransform yearText;
     [SerializeField] Image fade;
+    [SerializeField] BossTank bossTank;
+    [SerializeField] GameObject bomb;
     // Start is called before the first frame update
     void Start()
     {
-        //LoadInfo();
-        SetTime(30f);
+        LoadInfo();
+        SetTime(45f);
         StartCoroutine(BiggerText(4f));
+        StartCoroutine(SpawnBomb());
+        gameManager.Failed();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //PlayerHit(true);
+        Timer();
+        PlayerHit(true);
+        if (bossTank == null)
+        {
+            gameManager.Succeed();
+            time = 0.001f;
+        }
+
     }
     IEnumerator BiggerText(float time)
     {
@@ -32,6 +43,8 @@ public class BossStage1Logic : Stage
         } while (s < 15f);
 
         StartCoroutine(FadeIn(fade, 2f));
+
+
     }
 
     IEnumerator FadeIn(Image image, float time)
@@ -45,6 +58,21 @@ public class BossStage1Logic : Stage
         } while (image.color.a > 0);
 
 
+    }
+
+    IEnumerator SpawnBomb()
+    {
+        yield return new WaitForSeconds(10f);
+        while (time > 1f)
+        {
+            int randNum = Random.Range(0, 2);
+            float randX = randNum == 0 ? -9 : 9;
+            float randY = Random.Range(0f, 4f);
+            Vector2 spawnPos = new Vector2(randX, randY);
+            float angle = randNum == 0 ? Random.Range(0f, 60f) : Random.Range(120f, 180f);
+            Instantiate(bomb, spawnPos, Quaternion.Euler(0, 0, angle));
+            yield return new WaitForSeconds(0.9f);
+        }
     }
 
 }

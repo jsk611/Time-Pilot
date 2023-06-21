@@ -57,6 +57,7 @@ public class Stage : MonoBehaviour
     {
         if (playerScript.isHit)
         {
+            gameManager.DecreaseHp();
             playerScript.isHit = false;
         }
     }
