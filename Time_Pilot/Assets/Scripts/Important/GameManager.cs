@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(baseUI);
         DontDestroyOnLoad(timeOutUI);
         DontDestroyOnLoad(upgradeUI);
-        score = 1950;
+        score = 2023;
         checkPoint = 1900;
         level = 0;
         hp = 4;
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
             score -= Time.deltaTime * 4;
         scoreText.text = ((int)score).ToString();
         
-        if(score <= 1939 && bossStageNum == 0)
+        if(score <= 1939.2f && bossStageNum == 0)
         {
             score = 1939.1f;
             bossStageNum = 1;
@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
             Upgrade();
             isCheckpoint = false;
         }
+        if (SceneManager.GetActiveScene().name.Contains("Boss") && success) StartCoroutine(BonusUpgrade());
         yield return new WaitForSeconds(0.1f);
         countdown.SetActive(true);
         Text count = countdown.GetComponentInChildren<Text>();
@@ -165,19 +166,20 @@ public class GameManager : MonoBehaviour
     public void Succeed()
     {
         success = true;
+        
     }
     public void Failed()
     {
         success = false;
 
         //보스전 타임오버 시 예외처리
-        if (SceneManager.GetActiveScene().name.Contains("Boss"))
-        {
-            DecreaseHp();
-            DecreaseHp();
-            DecreaseHp();
-            DecreaseHp();
-        }
+        //if (SceneManager.GetActiveScene().name.Contains("Boss"))
+        //{
+        //    DecreaseHp();
+        //    DecreaseHp();
+        //    DecreaseHp();
+        //    DecreaseHp();
+        //}
         DecreaseHp();
     }
     public void DecreaseHp()
@@ -239,6 +241,19 @@ public class GameManager : MonoBehaviour
 
         
     }
+
+    IEnumerator BonusUpgrade()
+    {
+        for(int i=0; i<3; i++)
+        {
+            upgradeUI.SetActive(true);
+            upgradeUI.GetComponentInChildren<UpgradeLogic>().ResetChoice();
+            while (upgradeUI.activeSelf)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
     public void NextStage()
     {
         //보스 스테이지 이동
@@ -267,20 +282,25 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("score", (int)score);
 
-        string[] grade = new string[] { "GOD!!!", "S++", "S+", "S", "A++", "A+", "A", "A-", "A--", "B+", "B", "B-",
-            "C+", "C", "C-", "D+", "D", "D-","E+","E","E-","F+","F","F-","NOOB" };
+        string[] grade = new string[] { "Legend", "S+", "S", "A+", "A", "A-", "B+", "B", "B-",
+            "C+", "C", "C-","D","E","F","NOOB" };
         int i = 0;
-        while(i<25)
-        {
-            if(score >= (19-i)*100)
-            {
-                PlayerPrefs.SetString("grade", grade[grade.Length-1-i]);
-                break;
-            }
-            i++;
-        }
-        if(i >= 25)
-            PlayerPrefs.SetString("grade", grade[0]);
+        if (score > 1950) PlayerPrefs.SetString("grade", grade[14]);
+        else if (score > 1850) PlayerPrefs.SetString("grade", grade[13]);
+        else if (score > 1750) PlayerPrefs.SetString("grade", grade[12]);
+        else if (score > 1600) PlayerPrefs.SetString("grade", grade[11]);
+        else if (score > 1500) PlayerPrefs.SetString("grade", grade[10]);
+        else if (score > 1400) PlayerPrefs.SetString("grade", grade[9]);
+        else if (score > 1200) PlayerPrefs.SetString("grade", grade[8]);
+        else if (score > 1000) PlayerPrefs.SetString("grade", grade[7]);
+        else if (score > 700) PlayerPrefs.SetString("grade", grade[6]);
+        else if (score > 400) PlayerPrefs.SetString("grade", grade[5]);
+        else if (score > 0) PlayerPrefs.SetString("grade", grade[4]);
+        else if (score > -500) PlayerPrefs.SetString("grade", grade[3]);
+        else if (score > -1200) PlayerPrefs.SetString("grade", grade[2]);
+        else if (score > -3000) PlayerPrefs.SetString("grade", grade[1]);
+        else PlayerPrefs.SetString("grade", grade[0]);
+
 
 
         if (score < PlayerPrefs.GetInt("maxScore", 9999))

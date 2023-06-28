@@ -53,13 +53,13 @@ public class Stage : MonoBehaviour
         }
     }
 
-    public void PlayerHit(bool isBossStage)
-    {
-        if (playerScript.isHit)
-        {
-            gameManager.DecreaseHp();
-            playerScript.isHit = false;
-        }
-    }
+    //public void PlayerHit(bool isBossStage)
+    //{
+    //    if (playerScript.isHit)
+    //    {
+    //        gameManager.DecreaseHp();
+    //        playerScript.isHit = false;
+    //    }
+    //}
 
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,33 +15,39 @@ public class BossStage1Logic : Stage
     {
         LoadInfo();
         SetTime(45f);
-        StartCoroutine(BiggerText(4f));
+        StartCoroutine(BiggerText(2f));
         StartCoroutine(SpawnBomb());
-        gameManager.Failed();
+        //gameManager.Failed();
     }
 
     // Update is called once per frame
     void Update()
     {
         Timer();
-        PlayerHit(true);
-        if (bossTank == null)
+        PlayerHit();
+        if (bossTank == null && time > 0.02f)
         {
             gameManager.Succeed();
-            time = 0.001f;
+            time = 0.01f;
+        }
+        if (time < 0)
+        {
+            gameManager.isInBossStage = false;
+            if(bossTank != null) gameManager.Failed();
+
         }
 
     }
     IEnumerator BiggerText(float time)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         float s = 0.5f;
         do
         {
-            s += Time.deltaTime / time * 15;
+            s += Time.deltaTime / time * 16;
             yearText.localScale = new Vector3(s, s, 1);
             yield return new WaitForEndOfFrame();
-        } while (s < 15f);
+        } while (s < 16f);
 
         StartCoroutine(FadeIn(fade, 2f));
 
@@ -71,7 +78,7 @@ public class BossStage1Logic : Stage
             Vector2 spawnPos = new Vector2(randX, randY);
             float angle = randNum == 0 ? Random.Range(0f, 60f) : Random.Range(120f, 180f);
             Instantiate(bomb, spawnPos, Quaternion.Euler(0, 0, angle));
-            yield return new WaitForSeconds(0.9f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
